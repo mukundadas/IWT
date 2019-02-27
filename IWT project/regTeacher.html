@@ -1,14 +1,27 @@
 <html>
-<head>
+<head>	
+<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+    authDomain: "iwtproj.firebaseapp.com",
+    databaseURL: "https://iwtproj.firebaseio.com",
+    projectId: "iwtproj",
+    storageBucket: "iwtproj.appspot.com",
+    messagingSenderId: "417785185411"
+  };
+  firebase.initializeApp(config);
+</script>
 	<style type='text/css'>
-	body{background-image: url('file:///Users/sam/Documents/IWT%20project/images/IMG_1900.jpg');background-position: center center;
+	body{background-image: url('./images/IMG_1900.jpg');background-position: center center;
     background-size: 100% 100%; }
     h1.title{font-family: Arial, Helvetica, serif;font-style: italic;}
     div{
 	background-color: white;
 	opacity: 0.85;
 	width:600px;
-	height:700px; 
+	height:700px;
 	border-radius: 15px;
 }
 label.inst{font-size: 10px}
