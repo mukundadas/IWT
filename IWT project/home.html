@@ -63,13 +63,9 @@ document.getElementById("btnSignIn").addEventListener('click', e=>{
 })
 
 function CheckForAccessType(emailID){
-  var database = firebase.database()
-  if database.ref("teachers").orderByChild("username").equalTo(emailID){
-    window.location.replace("http://www.w3schools.com");
-  } else {
-    window.location.replace("regStud.html");
-  }
+  alert("I am an alert box!");
 }
+
 </script>
 </body>
 </html>
