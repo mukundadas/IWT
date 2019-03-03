@@ -1,5 +1,8 @@
 <html>
 <head>
+  <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
 <title>Registeration-Student</title>
 <style type='text/css'>
 body{background-image: url('./images/IMG_3339.jpg');background-position: center center;
@@ -32,9 +35,9 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
 		<label class="headinglbl">USN<sup>*</sup></label><br/>
 		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
 		<label class="headinglbl">Email address<sup>*</sup></label><br/>
-		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
+		<input id="txtEmail" class="entries" type = "email" name="fn" size="50" required><br/><br/>
 		<label class="headinglbl">Enter password<sup>*</sup></label><br/>
-		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
+		<input id="txtPassword" class="entries" type = "password" name="fn" size="50" required><br/><br/>
 		<label class="headinglbl">Re-Enter password<sup>*</sup></label><br/>
 		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
 		<label class="headinglbl"> Select semester<sup>*</sup>:</label>
@@ -48,9 +51,29 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
   			<option value="7">7</option>
  			<option value="8">8</option>
 			</select><br/><br/>
-		<input class="btn" type="submit" value="Register">
+		<input id="btnSignUp" class="btn" type="submit" value="Register">
 		</div>
     </center>
+    <script>
+     // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+        authDomain: "iwtproj.firebaseapp.com",
+        databaseURL: "https://iwtproj.firebaseio.com",
+        projectId: "iwtproj",
+        storageBucket: "iwtproj.appspot.com",
+        messagingSenderId: "417785185411"
+      };
+      firebase.initializeApp(config);
+    document.getElementById("btnSignUp").addEventListener('click', e=>{
+      const email = document.getElementById("txtEmail").value;
+      const pass = document.getElementById("txtPassword").value;
+      firebase.auth().createUserWithEmailAndPassword(email, pass).then(alert("Succesfully Registered Student!")).catch(function(error) {
+       console.log(error.message);
+      });
+    })
+
+    </script>
 </body>
 
 </html>
