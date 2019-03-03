@@ -44,7 +44,7 @@ input.regbtn{color:lightblue;}
 </center>
 <script>
  // Initialize Firebase
- //check check
+
   var config = {
     apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
     authDomain: "iwtproj.firebaseapp.com",
@@ -57,10 +57,19 @@ input.regbtn{color:lightblue;}
 document.getElementById("btnSignIn").addEventListener('click', e=>{
   const email = document.getElementById("txtEmail").value;
   const pass = document.getElementById("txtPassword").value;
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(email, password).then(CheckForAccessType(email)).catch(function(error) {
    alert(error.message);
   });
 })
+
+function CheckForAccessType(emailID){
+  var database = firebase.database()
+  if database.ref("teachers").orderByChild("username").equalTo(emailID){
+    window.location.replace("http://www.w3schools.com");
+  } else {
+    window.location.replace("regStud.html");
+  }
+}
 </script>
 </body>
 </html>

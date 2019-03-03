@@ -29,18 +29,18 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
 		<label class="inst">Fields marked by<sup>*</sup> are Mandatory </label><br/>
 		<br/>
 		<label class="headinglbl">First Name<sup>*</sup></label><br/>
-		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
+		<input id="fn" class="entries" type = "text" name="fn" size="50"><br/><br/>
 		<label class="headinglbl">Last Name</label><br/>
-		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
+		<input id="sn" class="entries" type = "text" name="fn" size="50"><br/><br/>
 		<label class="headinglbl">USN<sup>*</sup></label><br/>
-		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
+		<input id="usn"class="entries" type = "text" name="fn" size="50"><br/><br/>
 		<label class="headinglbl">Email address<sup>*</sup></label><br/>
 		<input id="txtEmail" class="entries" type = "email" name="fn" size="50" required><br/><br/>
 		<label class="headinglbl">Enter password<sup>*</sup></label><br/>
 		<input id="txtPassword" class="entries" type = "password" name="fn" size="50" required><br/><br/>
 		<label class="headinglbl">Re-Enter password<sup>*</sup></label><br/>
-		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
-		<label class="headinglbl"> Select semester<sup>*</sup>:</label>
+		<input class="entries" type = "password" name="fn" size="50"><br/><br/>
+		<label id="sem" class="headinglbl"> Select semester<sup>*</sup>:</label>
 		<select>
   			<option value="1">1</option>
   			<option value="2">2</option>
@@ -68,12 +68,16 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
     document.getElementById("btnSignUp").addEventListener('click', e=>{
       const email = document.getElementById("txtEmail").value;
       const pass = document.getElementById("txtPassword").value;
-      firebase.auth().createUserWithEmailAndPassword(email, pass).then(alert("Succesfully Registered Student!")).catch(function(error) {
+      firebase.auth().createUserWithEmailAndPassword(email, pass).then(RegisterStudInfo(email)).catch(function(error) {
        console.log(error.message);
       });
     })
 
+    function RegisterStudInfo(emailID){
+      var databaseRef = firebase.database()
+      
+    }
+
     </script>
 </body>
-
 </html>
