@@ -1,6 +1,8 @@
 <html>
 <head>
     <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
 <title>
 Welcome</title>
 <style type='text/css'>
@@ -28,15 +30,37 @@ input.regbtn{color:lightblue;}
 		<form>
 			</br>
 			I am a: <input type="radio" name="identityType" value="Teacher" checked = "checked"> Teacher <input type="radio" name="identityType" value="Student"> Student<br/><br/>
-			<label class="lbl">Enter username</label><br/>
-			<input class="textentry" type = "text" name="username" size="50"> <br/><br/>
+			<label class="lbl">Enter your Email</label><br/>
+			<input id="txtEmail" class="textentry" type = "email" name="username" size="50"> <br/><br/>
 			<label class="lbl">Enter password</label><br/>
-			<input class="textentry" type = "text" name="password" size="50"><br/><br/><br/>
-			<input class="btn" type="submit" value="Login"><br/><br/>
+			<input id="txtPassword" class="textentry" type = "password" name="password" size="50"><br/><br/><br/>
+			<input id="btnSignIn" class="btn" type="submit" value="Login"><br/><br/>
 			<a class="regbtn" href = "regStud.html">Register as a student</a>
 			<a class="regbtn" href = "regTeacher.html"> Register as a teacher</a>
+      <br/>
+      <a class="regbtn" href = "regTeacher.html">Forgot your password?</a>
 		</form>
 	</div>
 </center>
+<script>
+ // Initialize Firebase
+ //check check
+  var config = {
+    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+    authDomain: "iwtproj.firebaseapp.com",
+    databaseURL: "https://iwtproj.firebaseio.com",
+    projectId: "iwtproj",
+    storageBucket: "iwtproj.appspot.com",
+    messagingSenderId: "417785185411"
+  };
+  firebase.initializeApp(config);
+document.getElementById("btnSignIn").addEventListener('click', e=>{
+  const email = document.getElementById("txtEmail").value;
+  const pass = document.getElementById("txtPassword").value;
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+   alert(error.message);
+  });
+})
+</script>
 </body>
 </html>
