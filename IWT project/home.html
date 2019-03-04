@@ -39,7 +39,7 @@ input.regbtn{color:lightblue;}
 			<a class="regbtn" href = "regTeacher.html"> Register as a teacher</a>
       <br/>
       <a class="regbtn" href = "regTeacher.html">Forgot your password?</a>
-		
+
 	</div>
 </center>
 <script>
@@ -57,13 +57,41 @@ input.regbtn{color:lightblue;}
 document.getElementById("btnSignIn").addEventListener('click', e=>{
   const email = document.getElementById("txtEmail").value;
   const pass = document.getElementById("txtPassword").value;
-  firebase.auth().signInWithEmailAndPassword(email, pass).then(CheckForAccessType(email)).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(email, pass).then(checkLogin(email)).catch(function(error) {
    alert(error.message);
   });
 })
+var db = firebase.database()
+function checkLogin(emailID){
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        if(db.ref('teachers').orderByChild("username").equalTo(true)){
+          var uType="teachers";
+          getData(uType);
+         window.location.assign("./homeTeacher.html");
+        }
+        else {
+          var uType="students";
+          getData(uType);
+          window.location.assign("./homeStud.html");
+        }
 
-function CheckForAccessType(emailID){
-    window.location.assign("https://www.google.com");
+    } else {
+      alert("Invalid Login! Try again!");
+    }
+  });
+}
+
+function getData(uType){
+if(uType=="teachers"){
+  var dpt=db.ref('teachers').orderByChild()
+  var fn=
+  var ln=
+  var un=
+}
+else{
+
+}
 }
 
 </script>
