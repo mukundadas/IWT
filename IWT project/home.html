@@ -65,7 +65,14 @@ document.getElementById("btnSignIn").addEventListener('click', e=>{
 function checkLogin(emailID){
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        window.location.assign("./homeStud.html");
+        var db = firebase.database()
+        if(db.ref('teachers').orderByChild("username").equalTo(true)){
+         window.location.assign("./homeTeacher.html");
+        }
+        else {
+          window.location.assign("./homeStud.html");
+        }
+
     } else {
       alert("Invalid Login! Try again!");
     }
