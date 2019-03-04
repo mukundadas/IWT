@@ -32,9 +32,9 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
 			<label class="inst">Fields marked by are Mandatory </label><br/>
 		<br/>
 		<label class="headinglbl">First Name<sup>*</sup></label><br/>
-		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
+		<input id="textfn" class="entries" type = "text" name="fn" size="50"><br/><br/>
 		<label class="headinglbl">Last Name</label><br/>
-		<input class="entries" type = "text" name="fn" size="50"><br/><br/>
+		<input id="textln" class="entries" type = "text" name="fn" size="50"><br/><br/>
 		<label class="headinglbl">Email address<sup>*</sup></label><br/>
 		<input id="txtEmail" class="entries" type = "email" name="fn" size="50" required><br/><br/>
 		<label class="headinglbl">Enter password<sup>*</sup></label><br/>
@@ -42,7 +42,7 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
 		<label class="headinglbl">Re-Enter password<sup>*</sup></label><br/>
 		<input class="entries" type = "password" name="fn" size="50"><br/><br/>
 		<label class="headinglbl">Select branch:<sup>*</sup></label>
-		<select>
+		<select id="selDept">
   			<option value="Computer Scinece">Computer Science</option>
   			<option value="Information Science">Infomration Science</option>
   			<option value="Electronics & communications">Electronics&Communications</option>
@@ -68,16 +68,22 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
   document.getElementById("btnSignUp").addEventListener('click', e=>{
     const email = document.getElementById("txtEmail").value;
     const pass = document.getElementById("txtPassword").value;
-    firebase.auth().createUserWithEmailAndPassword(email, pass).then(RegisterTeacherInfo(email)).catch(function(error) {
+    const firstname = document.getElementById("textfn").value;
+    const lastname = document.getElementById("textln").value;
+    const dept = document.getElementById("selDept").value;
+    firebase.auth().createUserWithEmailAndPassword(email, pass).then(RegisterTeacherInfo(email,firstname,lastname,dept)).catch(function(error) {
      console.log(error.message);
     });
   })
 
-  function RegisterTeacherInfo(emailID){
+  function RegisterTeacherInfo(emailID,firstname,lastname,dept){
     var database = firebase.database()
     var uid = Math.floor(Math.random() * 10001);
     database.ref('teachers').child(uid).set({
-      username: emailID
+      username: emailID,
+      FirstName: firstname,
+      LastName: lastname,
+      Dept: dept
     })
   }
 
