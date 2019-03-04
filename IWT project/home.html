@@ -61,15 +61,18 @@ document.getElementById("btnSignIn").addEventListener('click', e=>{
    alert(error.message);
   });
 })
-
+var db = firebase.database()
 function checkLogin(emailID){
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        var db = firebase.database()
         if(db.ref('teachers').orderByChild("username").equalTo(true)){
+          var uType="teachers";
+          getData(uType);
          window.location.assign("./homeTeacher.html");
         }
         else {
+          var uType="students";
+          getData(uType);
           window.location.assign("./homeStud.html");
         }
 
@@ -77,6 +80,18 @@ function checkLogin(emailID){
       alert("Invalid Login! Try again!");
     }
   });
+}
+
+function getData(uType){
+if(uType=="teachers"){
+  var dpt=db.ref('teachers').orderByChild()
+  var fn=
+  var ln=
+  var un=
+}
+else{
+
+}
 }
 
 </script>
