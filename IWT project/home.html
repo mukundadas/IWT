@@ -55,7 +55,23 @@ a.frgbtn{color:red;}
     messagingSenderId: "417785185411"
   };
   firebase.initializeApp(config);
-  var db = firebase.database();
+
+
+
+
+
+  /*tref.orderByChild("username").on("value", function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+      var key = childSnapshot.key;
+      // childData will be the actual contents of the child
+      var childData = childSnapshot.val();
+     console.log(key);
+     console.log(childSnapshot);
+       });
+  }, function (error) {
+     console.log("Error: " + error.code);
+  });*/
   document.getElementById("btnSignIn").addEventListener('click', e=>{
   const email = document.getElementById("txtEmail").value;
   const pass = document.getElementById("txtPassword").value;
@@ -75,7 +91,19 @@ a.frgbtn{color:red;}
 });
 
 function changePage(email){
-window.location.assign("./homeTeacher.html");
+  var tref = firebase.database().ref("teachers/");
+  var arr=[''];
+  var str;
+  tref.orderByChild("username").on("child_added", function(data) {
+    arr=data.val().username;
+    //console.log(arr);
+    for(let i=0;i<arr.length;i++)
+    {
+      str+=arr[i];
+      }
+      console.log(str);
+  });
+//window.location.assign("./homeTeacher.html");
 }
 function forgotPassword() {
   const email = document.getElementById("txtEmail").value;
