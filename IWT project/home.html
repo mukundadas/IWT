@@ -20,6 +20,7 @@ label.lbl{font-family: Arial, Helvetica, sans-serif;font-size: 25px;}
 input.textentry{height:25px;border-radius: 5px; background-color: lightgrey}
 input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;font-size: 20px;background-color: lightgrey; color:black; border-radius: 10px}
 input.regbtn{color:lightblue;}
+a.frgbtn{color:red;}
 </style>
 </head>
 <body>
@@ -29,7 +30,7 @@ input.regbtn{color:lightblue;}
 	<div>
 
 			</br>
-			I am a: <input type="radio" name="identityType" value="Teacher" checked = "checked"> Teacher <input type="radio" name="identityType" value="Student"> Student<br/><br/>
+			<!--I am a: <input type="radio" name="identityType" value="Teacher" checked = "checked"> Teacher <input type="radio" name="identityType" value="Student"> Student<br/><br/>-->
 			<label class="lbl">Enter your Email</label><br/>
 			<input id="txtEmail" class="textentry" type = "email" name="username" size="50"> <br/><br/>
 			<label class="lbl">Enter password</label><br/>
@@ -38,7 +39,7 @@ input.regbtn{color:lightblue;}
 			<a class="regbtn" href = "regStud.html">Register as a student</a>
 			<a class="regbtn" href = "regTeacher.html"> Register as a teacher</a>
       <br/>
-      <a class="regbtn" href = "regTeacher.html">Forgot your password?</a>
+      <a class="frgbtn" onclick="forgotPassword()">Forgot your password?</a>
 
 	</div>
 </center>
@@ -60,7 +61,6 @@ input.regbtn{color:lightblue;}
   const pass = document.getElementById("txtPassword").value;
   firebase.auth().signInWithEmailAndPassword(email, pass).then(function(user) {
     changePage(email);
-       //window.location.assign("./homeTeacher.html");
   }).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -75,9 +75,14 @@ input.regbtn{color:lightblue;}
 });
 
 function changePage(email){
-alert("ok")
+window.location.assign("./homeTeacher.html");
 }
-
+function forgotPassword() {
+  const email = document.getElementById("txtEmail").value;
+  firebase.auth().sendPasswordResetEmail(email)
+  .then(alert('Reset Email has been sent to your Email ID!'))
+   //.catch(this.forgotPasswordFail.bind(this));
+}
 
 
 
