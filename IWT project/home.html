@@ -93,13 +93,15 @@ a.frgbtn{color:red;}
 function changePage(email){
   var tref = firebase.database().ref("teachers/");
   var arr=[''];
+  var str;
   tref.orderByChild("username").on("child_added", function(data) {
     arr=data.val().username;
-    console.log(arr);
+    //console.log(arr);
     for(let i=0;i<arr.length;i++)
     {
-    alert(arr[i]);
+      str+=arr[i];
       }
+      console.log(str);
   });
 //window.location.assign("./homeTeacher.html");
 }
