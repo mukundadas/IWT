@@ -19,6 +19,80 @@
       }
     a.button{font-size:16px;padding:10px;color: blue;color:black;background-color: lightgrey;border-radius: 10px;}
     a.button:hover{background-color: grey}
+    /* The popup form - hidden by default */
+    .form-popup {
+      display: none;
+      position: fixed;
+
+      border: 3px solid #f1f1f1;
+      z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+      max-width: 600px;
+      padding: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+      max-height: 600px;
+      border-style: solid;
+      border-width: 5px;
+    }
+
+    /* Full-width input fields */
+    .form-container input[type=text], .form-container input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for the Next button */
+    .form-container .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom:10px;
+      opacity: 0.8;
+    }
+/*  #button {
+       width: 6em;
+       border: 2px solid green;
+       background: #ffe;
+       border-radius: 5px;
+   }
+   a {
+       display: block;
+       width: 100%;
+       line-height: 2em;
+       text-align: center;
+       text-decoration: none;
+       border-radius: 5px;
+   }
+   a:hover {
+       color: red;
+       background: #eff;
+   }*/
+    /* Add a red background color to the Next button */
+    .form-container .cancel {
+      background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+      opacity: 1;
+    }
   </style>
 =======
     <meta charset="utf-8">
@@ -30,7 +104,38 @@
       </br>
         <center><image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" ></center>
         <center><h1>Teacher Portal</h1></center>
-        <center><a class="button" href="QuestUpload.html">Upload new question paper</a></center>
+        <center><a class="button" onclick="openForm()">Upload new question paper</a></center>
+
+        <div class="form-popup" id="myForm">
+          <form action=QuestUpload.html" class="form-container">
+            <h1 align="center">Question paper</h1>
+            <label class="headinglbl"><b>Select branch:<b><sup>*</sup></label>
+            <select id="selDept">
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Science">Information Science</option>
+                <option value="Electronics & communications">Electronics&Communications</option>
+              <option value="Civil Engineering">Civil Engineering</option>
+              <option value="Industrial Engineering">Industrial Engineering</option>
+                <option value="Aeronautics">Aeronautics</option>
+              </select><br/><br/>
+            <label class="Semester"><b>Semester:</b></label>
+            <input type="text" placeholder="Enter Semester" name="Semester" required>
+            <label class="subject"><b>Subject:</b></label>
+            <input type="text" placeholder="Enter Subject" name="Subject" required>
+            <label class="marks"><b>Select marks:<b></label>
+              <input type="radio" name="marks" value="50">50
+              <input type="radio" name="marks" value="100">100
+              <div id="button"><a href="QuestUpload.html">Next</a></div>
+
+          </form>
+        </div>
       </div>
+      <script>
+      function openForm() {
+        document.getElementById("myForm").style.display = "block";
+      }
+
+
+      </script>
     </body>
 </html>
