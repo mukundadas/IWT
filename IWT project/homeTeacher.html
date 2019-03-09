@@ -118,24 +118,26 @@
               <option value="Industrial Engineering">Industrial Engineering</option>
                 <option value="Aeronautics">Aeronautics</option>
               </select><br/><br/>
-            <label class="Semester"><b>Semester:</b></label>
+            <label id="sem" class="Semester"><b>Semester:</b></label>
             <input type="text" placeholder="Enter Semester" name="Semester" required>
-            <label class="subject"><b>Subject:</b></label>
+            <label id="sub" class="subject"><b>Subject:</b></label>
             <input type="text" placeholder="Enter Subject" name="Subject" required>
-            <label class="marks"><b>Select marks:<b></label>
+            <label id="marks" class="marks"><b>Select marks:<b></label>
               <input type="radio" name="marks" value="50">50
               <input type="radio" name="marks" value="100">100
               <div id="button"><a href="QuestUpload.html">Next</a></div>
-
-          </form>
+            </form>
         </div>
       </div>
       <script>
       function openForm() {
         document.getElementById("myForm").style.display = "block";
       }
-
-
-      </script>
+      var Semester=document.getElementById("sem")
+      var subject=document.getElementById("sub")
+      var marks=document.getElementById("marks")
+      var querystring= "?para1=" +Semester +"&para2=" +subject+ "&para2=" +marks;
+      window.location.href="QuestUpload.html"+querystring;
+    </script>
     </body>
 </html>
