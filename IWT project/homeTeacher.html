@@ -133,11 +133,14 @@
       function openForm() {
         document.getElementById("myForm").style.display = "block";
       }
+      function querystring(sem,sub,marks)
+      {
       var Semester=document.getElementById("sem")
       var subject=document.getElementById("sub")
       var marks=document.getElementById("marks")
       var querystring= "?para1=" +Semester +"&para2=" +subject+ "&para2=" +marks;
       window.location.href="QuestUpload.html"+querystring;
+    }
     </script>
     </body>
 </html>
