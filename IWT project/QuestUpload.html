@@ -1,13 +1,19 @@
 <html>
 <head>
-  <title>Question paper</title>
-  <script type='text/javascript'>
-    function check(question,marks){
-      var value = marks.value;
-      alert(value);
-    }
-
+  <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+      authDomain: "iwtproj.firebaseapp.com",
+      databaseURL: "https://iwtproj.firebaseio.com",
+      projectId: "iwtproj",
+      storageBucket: "iwtproj.appspot.com",
+      messagingSenderId: "417785185411"
+    };
+    firebase.initializeApp(config);
   </script>
+  <title>Question paper</title>
 <style type='text/css'>
   h1.banner{font-family: Arial, Helvetica, serif;font-style: italic;font-size:50px;}
   div.mainDiv{
@@ -37,9 +43,32 @@
 </br>
 </br>
 <center>
-  <input class="btn" type="submit" onclick="check(document.getElementById('questionEntry'),document.getElementById('marksEntry'))" value="Add"/></center>
+  <input class="btn" type="submit" onclick=check(document.getElementById("questionEntry"),document.getElementById("marksEntry")) value="Add"/></center>
 </form>
 </div>
 </center>
+<script>
+var papername= 'testOne'
+var sem = 5;
+var branch = 'Computer Science';
+var maxmarks=50;
+
+  function check(question,marks){
+    if (marks.value < maxmarks && question.value != "") {
+      maxmarks = maxmarks - marks;
+      save(marks.value,sem,papername,branch,question.value)
+    } else {
+      alert("Entered value for marks is invalid.")
+    }
+  }
+
+function save(marks,sem,papername,branch,question){
+var database = firebase.database()
+alert(marks)
+database.ref('papers').set({
+  one: sem
+})
+}
+</script>
 </body>
 </html>
