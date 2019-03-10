@@ -49,6 +49,15 @@ var maxmarks=50;
       alert("Entered value for marks is invalid.")
     }
   }
+  var config = {
+      apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+      authDomain: "iwtproj.firebaseapp.com",
+      databaseURL: "https://iwtproj.firebaseio.com",
+      projectId: "iwtproj",
+      storageBucket: "iwtproj.appspot.com",
+      messagingSenderId: "417785185411"
+    };
+    firebase.initializeApp(config);
 
   function save(marks,sem,papername,branch,qustion){
       var database = firebase.database()
