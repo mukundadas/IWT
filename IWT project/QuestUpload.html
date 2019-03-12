@@ -1,5 +1,6 @@
 <html>
 <head>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
   <title>Question paper</title>
 <style type='text/css'>
@@ -31,38 +32,43 @@
 </br>
 </br>
 <center>
-  <input class="btn" type="submit" onclick=check(document.getElementById("questionEntry"),document.getElementById("marksEntry")) value="Add"/></center>
+  <input class="btn" type="submit" onclick="checkM()" value="Add"/></center>
 </form>
 </div>
 </center>
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
-    authDomain: "iwtproj.firebaseapp.com",
-    databaseURL: "https://iwtproj.firebaseio.com",
-    projectId: "iwtproj",
-    storageBucket: "iwtproj.appspot.com",
-    messagingSenderId: "417785185411"
-  };
-  firebase.initializeApp(config);
+// Initialize Firebase
+ var config = {
+   apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+   authDomain: "iwtproj.firebaseapp.com",
+   databaseURL: "https://iwtproj.firebaseio.com",
+   projectId: "iwtproj",
+   storageBucket: "iwtproj.appspot.com",
+   messagingSenderId: "417785185411"
+ };
+ firebase.initializeApp(config);
 var papername= 'testOne'
 var sem = 5;
 var branch = 'Computer Science';
 var maxmarks=50;
 
-  function check(question,marks){
-    if (marks.value < maxmarks && question.value != "") {
+  function checkM(){
+    var question=document.getElementById("questionEntry");
+    var marks=document.getElementById("marksEntry");
+      console.log(marks);
+      console.log(question);
+    if (marks < maxmarks && question != "") {
+        console.log("HELLO WORLD");
       maxmarks = maxmarks - marks;
-      save(marks.value,sem,papername,branch,question.value)
+      ValSave(marks.value,sem,papername,branch,question.value)
     } else {
       alert("Entered value for marks is invalid.")
     }
   }
 
-function save(marks,sem,papername,branch,question){
+function ValSave(marks,sem,papername,branch,question){
 var database = firebase.database()
-alert(marks)
+//alert(marks)
 database.ref('papers').set({
   one: sem
 })
