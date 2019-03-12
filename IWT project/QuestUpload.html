@@ -31,7 +31,7 @@
 </br>
 </br>
 <center>
-  <input class="btn" type="submit" onclick=check(document.getElementById("questionEntry"),document.getElementById("marksEntry")) value="Add"/></center>
+  <input class="btn" type="submit" onclick="mcheck(document.getElementById("questionEntry"),document.getElementById("marksEntry"))" value="Add" ></center>
 </form>
 </div>
 </center>
@@ -46,21 +46,22 @@
     messagingSenderId: "417785185411"
   };
   firebase.initializeApp(config);
-var papername= 'testOne'
+var papername= 'testOne';
 var sem = 5;
 var branch = 'Computer Science';
 var maxmarks=50;
 
-  function check(question,marks){
+  function mcheck(question,marks){
+    console.log(marks.value);
     if (marks.value < maxmarks && question.value != "") {
       maxmarks = maxmarks - marks;
-      save(marks.value,sem,papername,branch,question.value)
+      vsave(marks.value,sem,papername,branch,question.value)
     } else {
       alert("Entered value for marks is invalid.")
     }
   }
 
-function save(marks,sem,papername,branch,question){
+function vsave(marks,sem,papername,branch,question){
 var database = firebase.database()
 alert(marks)
 database.ref('papers').set({
