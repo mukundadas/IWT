@@ -36,7 +36,7 @@
 </div>
 </center>
 <script>
-  // Initialize Firebase
+  // Initialize Firebase//
   var config = {
     apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
     authDomain: "iwtproj.firebaseapp.com",
@@ -52,7 +52,7 @@ var branch = 'Computer Science';
 var maxmarks=50;
 
   function mcheck(question,marks){
-    console.log(marks.value);
+    console.log("hello");
     if (marks.value < maxmarks && question.value != "") {
       maxmarks = maxmarks - marks;
       vsave(marks.value,sem,papername,branch,question.value)
