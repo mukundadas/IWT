@@ -1,18 +1,6 @@
 <html>
 <head>
   <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
-      authDomain: "iwtproj.firebaseapp.com",
-      databaseURL: "https://iwtproj.firebaseio.com",
-      projectId: "iwtproj",
-      storageBucket: "iwtproj.appspot.com",
-      messagingSenderId: "417785185411"
-    };
-    firebase.initializeApp(config);
-  </script>
   <title>Question paper</title>
 <style type='text/css'>
   h1.banner{font-family: Arial, Helvetica, serif;font-style: italic;font-size:50px;}
@@ -48,6 +36,16 @@
 </div>
 </center>
 <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+    authDomain: "iwtproj.firebaseapp.com",
+    databaseURL: "https://iwtproj.firebaseio.com",
+    projectId: "iwtproj",
+    storageBucket: "iwtproj.appspot.com",
+    messagingSenderId: "417785185411"
+  };
+  firebase.initializeApp(config);
 var papername= 'testOne'
 var sem = 5;
 var branch = 'Computer Science';
