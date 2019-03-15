@@ -88,21 +88,29 @@ a.frgbtn{color:red;}
       console.log(error);
   });
 });
-
+var arr=[];var i;var f;
 function changePage(email){
   var tref = firebase.database().ref("teachers/");
-  var arr=[''];
-  var str;
   tref.orderByChild("username").on("child_added", function(data) {
-    arr=data.val().username;
-    //console.log(arr);
-    for(let i=0;i<arr.length;i++)
-    {
-      str+=arr[i];
-      }
-      console.log(str);
+    arr.push(data.val().username);
+  console.log(indexOf("deepak@gmail.com"));
   });
-//window.location.assign("./homeTeacher.html");
+  /*for(i=0;i<arr.length;i++)
+  {
+    if(email.trim()==arr[i].trim()){
+    f=true;
+    break;
+  }
+    else {
+      f=false;
+      console.log(f);
+      break;
+    }
+  }
+  if(f){
+    window.location.assign("./homeTeacher.html");
+  }*/
+
 }
 function forgotPassword() {
   const email = document.getElementById("txtEmail").value;

@@ -1,0 +1,75 @@
+<html>
+<head>
+  <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <title>Question paper</title>
+<style type='text/css'>
+  h1.banner{font-family: Arial, Helvetica, serif;font-style: italic;font-size:50px;}
+  div.mainDiv{
+    background-color: white;
+  	opacity: 0.85;
+  	width:800px;
+  	height:600px;
+  	border-radius: 15px;
+  }
+  body{background-image: url("./images/IMG_0189.jpg");background-position: center center;
+      background-size: 100% 100%; }
+    textarea{background-color: lightgrey;}
+    input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;font-size: 20px;background-color: lightgrey; color:black; border-radius: 10px}
+</style>
+</head>
+<body>
+<center>
+<div class="mainDiv">
+<br><image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
+<form>
+<h2>Enter the question</h2>
+<textarea id="questionEntry" rows="5" cols="100">
+</textarea>
+<h2>Enter marks for the question</h2>
+<textarea id="marksEntry">
+</textarea>
+<br>
+<br>
+<center>
+  <input class="btn" type="submit" onclick="mcheck()" value="Add" ></center>
+</form>
+</div>
+</center>
+<script>
+// Initialize Firebase
+ var config = {
+   apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+   authDomain: "iwtproj.firebaseapp.com",
+   databaseURL: "https://iwtproj.firebaseio.com",
+   projectId: "iwtproj",
+   storageBucket: "iwtproj.appspot.com",
+   messagingSenderId: "417785185411"
+ };
+  firebase.initializeApp(config);
+var papername= 'testOne';
+var sem = 5;
+var branch = 'Computer Science';
+var maxmarks=50;
+var question=document.getElementById("questionEntry");
+var marks=document.getElementById("marksEntry");
+  function mcheck(){
+    if (marks.value < maxmarks && question.value != "") {
+      maxmarks = maxmarks - marks;
+      vsave(marks.value,sem,papername,branch,question.value)
+    } else {
+      alert("Entered value for marks is invalid.")
+    }
+  }
+
+function vsave(marks,sem,papername,branch,question){
+var database = firebase.database()
+alert(marks);
+var uid = Math.floor(Math.random() * 10001);
+database.ref('papers').child(uid).set({
+  one: sem
+})
+}
+</script>
+</body>
+</html>

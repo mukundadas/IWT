@@ -1,7 +1,9 @@
 <html>
 <head>
-  <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
-  <title>Question paper</title>
+  <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<title>Question Upload</title>
 <style type='text/css'>
   h1.banner{font-family: Arial, Helvetica, serif;font-style: italic;font-size:50px;}
   div.mainDiv{
@@ -18,56 +20,52 @@
 </style>
 </head>
 <body>
-<center>
-<div class="mainDiv">
-</br><image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
-<form>
-<h2>Enter the question</h2>
-<textarea id="questionEntry" rows="5" cols="100">
-</textarea>
-<h2>Enter marks for the question</h2>
-<textarea id="marksEntry">
-</textarea>
-</br>
-</br>
-<center>
-  <input class="btn" type="submit" onclick="mcheck(document.getElementById("questionEntry"),document.getElementById("marksEntry"))" value="Add" ></center>
-</form>
-</div>
-</center>
-<script>
-  // Initialize Firebase//
-  var config = {
-    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
-    authDomain: "iwtproj.firebaseapp.com",
-    databaseURL: "https://iwtproj.firebaseio.com",
-    projectId: "iwtproj",
-    storageBucket: "iwtproj.appspot.com",
-    messagingSenderId: "417785185411"
-  };
-  firebase.initializeApp(config);
-var papername= 'testOne';
-var sem = 5;
-var branch = 'Computer Science';
-var maxmarks=50;
-
-  function mcheck(question,marks){
-    console.log("hello");
-    if (marks.value < maxmarks && question.value != "") {
-      maxmarks = maxmarks - marks;
-      vsave(marks.value,sem,papername,branch,question.value)
-    } else {
-      alert("Entered value for marks is invalid.")
+  <center>
+  <div class="mainDiv">
+  </br><image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
+  <form>
+  <h2>Enter the question</h2>
+  <textarea id="questionEntry" rows="5" cols="100">
+  </textarea>
+  <h2>Enter marks for the question</h2>
+  <textarea id="marksEntry">
+  </textarea>
+  </br>
+  </br>
+  <center>
+    <input class="btn" type="submit" id="btnQ" value="Add" ></center>
+  </form>
+  </div>
+  </center>
+    <script>
+     // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+        authDomain: "iwtproj.firebaseapp.com",
+        databaseURL: "https://iwtproj.firebaseio.com",
+        projectId: "iwtproj",
+        storageBucket: "iwtproj.appspot.com",
+        messagingSenderId: "417785185411"
+      };
+      firebase.initializeApp(config);
+    document.getElementById("btnQ").addEventListener('click', e=>{
+      const marks = document.getElementById("marksEntry").value;
+      const ques = document.getElementById("questionEntry").value;
+      upl(marks,ques);
+    })
+var arr=[];
+    function upl(marks,ques){
+      var tref = firebase.database().ref("teachers/");
+      tref.orderByChild("username").on("child_added", function(data) {
+        arr.push(data.val().username);
+      console.log(arr);  });
+      /*var database = firebase.database()
+      var uid = Math.floor(Math.random() * 10001);
+      database.ref('teachers').child(uid).set({
+        marks: marks,
+        question: ques
+      })*/
     }
-  }
-
-function vsave(marks,sem,papername,branch,question){
-var database = firebase.database()
-alert(marks)
-database.ref('papers').set({
-  one: sem
-})
-}
 </script>
 </body>
 </html>
