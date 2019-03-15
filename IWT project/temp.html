@@ -73,3 +73,10 @@ database.ref('papers').child(uid).set({
 </script>
 </body>
 </html>
+
+
+function upl(marks,ques){
+  var tref = firebase.database().ref("teachers/");
+  tref.orderByChild("username").on("child_added", function(data) {
+    arr.push(data.val().username);
+  console.log(arr);  });
