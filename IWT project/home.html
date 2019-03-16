@@ -77,25 +77,22 @@ a.frgbtn{color:red;}
     }
   });
 }
-var arr=[];var i;var f;
+var tarr=[];var sarr=[];var i;var f;
 function changePage(email){
   var tref = firebase.database().ref("teachers/");
+  var sref = firebase.database().ref("students/");
   tref.orderByChild("username").on("child_added", function(data) {
-    arr.push(data.val().username);
-  //console.log(arr);
-  //console.log(typeof(arr[0]));
-  for(i=0;i<arr.length;i++)
-  {
-    if(arr[i].trim()==email.trim())
-    {
-    //f=true;
-    //console.log(f)
-    //window.location.assign('./homeTeacher.html');
-    break;
-  }
-  }
-    alert("HELLO")
+    tarr.push(data.val().username);
   });
+  sref.orderByChild("username").on("child_added", function(data) {
+    sarr.push(data.val().username);
+  });
+  if(sarr.includes(email)){
+    window.location.assign('./homeStud.html');
+  }
+  else if(tarr.includes(email)){
+    window.location.assign('./homeTeacher.html');
+  }
 }
 function forgotPassword() {
   const email = document.getElementById("txtEmail").value;
