@@ -80,3 +80,7 @@ function upl(marks,ques){
   tref.orderByChild("username").on("child_added", function(data) {
     arr.push(data.val().username);
   console.log(arr);  });
+
+  .then(function(user) {
+    changePage(email);
+  })
