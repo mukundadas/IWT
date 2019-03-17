@@ -1,7 +1,65 @@
 <html>
 <head>
-<title>Upload Question Paper</title>
+  <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+  <title>Upload Question Paper</title>
+  <style type='text/css'>
+  body{background-image: url('./images/IMG_0189.jpg');background-position: center center;
+    background-size: 100% 100%; }
+    div{background-color: white;
+    opacity: 0.85;
+   	width:800px;
+   	height:600px;
+   	border-radius: 15px;}
+    input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;font-size: 20px;background-color: lightgrey; color:black; border-radius: 10px}
+    textarea{background-color: lightgrey}
+    h1{font-family: Arial, Helvetica, serif;font-style: italic;font-size: 40px}
+    h2{font-family: Arial, Helvetica, serif;font-style: italic;font-size: 25px}
+    input.entries{height:25px;border-radius: 5px; background-color: lightgrey; width: 100px;}
+  </style>
 </head>
 <body>
+  <center>
+  <div>
+    <br/>
+    <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
+      <br/><br/>
+  <h1 class="heading">Enter the Question</h1>
+  <textarea id="QuestTxt" rows='10' cols='100'>
+  </textarea> </br>
+  <h2 class="heading"> Enter the alloted marks</h2>
+  <input id="MarksTxt" class="entries" type = "text" size="50"><br/><br/>
+  <input id="AddBtn" class="btn" type="submit" value="Add">
+</div>
+</center>
+<script>
+var config = {
+  apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+  authDomain: "iwtproj.firebaseapp.com",
+  databaseURL: "https://iwtproj.firebaseio.com",
+  projectId: "iwtproj",
+  storageBucket: "iwtproj.appspot.com",
+  messagingSenderId: "417785185411"
+};
+firebase.initializeApp(config);
+var papername = "Internet and web Technologies";
+var sem = 6;
+var branch = "computer Science&Engineering"
+document.getElementById("AddBtn").addEventListener('click', e=>{
+  const question = document.getElementById("QuestTxt").value;
+  const marks = document.getElementById("MarksTxt").value;
+  uploadToDB(question,marks)
+})
+
+function uploadToDB(currentQuestion,currentMarks){
+  var database = firebase.database()
+  var uid = Math.floor(Math.random() * 10001);
+  database.ref('papers').child(branch).child(sem).child(papername).child(uid).set({
+      Quest: currentQuestion,
+      Marks: currentMarks
+  })
+}
+</script>
 </body>
 </html>
