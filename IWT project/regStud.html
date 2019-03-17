@@ -11,7 +11,7 @@ body{background-image: url('./images/IMG_3339.jpg');background-position: center 
  div.studinfo{background-color: white;
  opacity: 0.85;
 	width:600px;
-	height:780px;
+	height:820px;
 	border-radius: 15px;}
 label.inst{font-size: 10px}
 label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
@@ -40,8 +40,8 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
 		<input id="txtPassword" class="entries" type = "password" name="fn" size="50" required><br/><br/>
 		<label class="headinglbl">Re-Enter password<sup>*</sup></label><br/>
 		<input class="entries" type = "password" name="fn" size="50"><br/><br/>
-		<label id="sem" class="headinglbl"> Select semester<sup>*</sup>:</label>
-		<select>
+		<label class="headinglbl"> Select semester<sup>*</sup>:</label>
+		<select id="SelSem">
   			<option value="1">1</option>
   			<option value="2">2</option>
   			<option value="3">3</option>
@@ -80,7 +80,7 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
       const firstname = document.getElementById("fn").value;
       const lastname = document.getElementById("sn").value;
       const usn = document.getElementById("usn").value;
-      const sem = document.getElementById("sem").value;
+      const sem = document.getElementById("SelSem").value;
       const dept = document.getElementById("selDept").value;
       firebase.auth().createUserWithEmailAndPassword(email, pass).then(RegisterStudInfo(email,firstname,lastname,dept,usn,sem)).catch(function(error) {
        console.log(error.message);
@@ -91,12 +91,12 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
       var database = firebase.database()
       var uid = Math.floor(Math.random() * 10001);
       database.ref('students').child(uid).set({
-        username: emailID,
-        FirstName: firstname,
-        LastName: lastname,
-        Dept: dept,
-        Usn: usn,
-        semester:sem
+          username: emailID,
+          FirstName: firstname,
+          LastName: lastname,
+          Dept: dept,
+          Usn: usn,
+          Sem: sem
       })
     }
 </script>
