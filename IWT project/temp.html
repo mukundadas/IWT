@@ -1,86 +1,103 @@
 <html>
 <head>
-  <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
-  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-  <title>Question paper</title>
+    <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<title>Welcome</title>
 <style type='text/css'>
-  h1.banner{font-family: Arial, Helvetica, serif;font-style: italic;font-size:50px;}
-  div.mainDiv{
-    background-color: white;
-  	opacity: 0.85;
-  	width:800px;
-  	height:600px;
-  	border-radius: 15px;
-  }
-  body{background-image: url("./images/IMG_0189.jpg");background-position: center center;
-      background-size: 100% 100%; }
-    textarea{background-color: lightgrey;}
-    input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;font-size: 20px;background-color: lightgrey; color:black; border-radius: 10px}
+body{background-image: url("./images/background.jpg");background-position: center center;
+    background-size: 100% 100%; }
+h1.banner{font-family: Arial, Helvetica, serif;font-style: italic;}
+div{
+	background-color: white;
+	opacity: 0.85;
+	width:500px;
+	height:320px;
+	border-radius: 15px;
+}
+label.lbl{font-family: Arial, Helvetica, sans-serif;font-size: 25px;}
+input.textentry{height:25px;border-radius: 5px; background-color: lightgrey}
+input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;font-size: 20px;background-color: lightgrey; color:black; border-radius: 10px}
+input.regbtn{color:lightblue;}
+a.frgbtn{color:red;}
 </style>
 </head>
 <body>
+<center><image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" ></center>
+<center><h1 class="banner"> Welcome to the online exam portal</h1></center>
 <center>
-<div class="mainDiv">
-<br><image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
-<form>
-<h2>Enter the question</h2>
-<textarea id="questionEntry" rows="5" cols="100">
-</textarea>
-<h2>Enter marks for the question</h2>
-<textarea id="marksEntry">
-</textarea>
-<br>
-<br>
-<center>
-  <input class="btn" type="submit" onclick="mcheck()" value="Add" ></center>
-</form>
-</div>
+	<div>
+
+			</br>
+			<!--I am a: <input type="radio" name="identityType" value="Teacher" checked = "checked"> Teacher <input type="radio" name="identityType" value="Student"> Student<br/><br/>-->
+			<label class="lbl">Enter your Email</label><br/>
+			<input id="txtEmail" class="textentry" type = "email" name="username" size="50"> <br/><br/>
+			<label class="lbl">Enter password</label><br/>
+			<input id="txtPassword" class="textentry" type = "password" name="password" size="50"><br/><br/><br/>
+			<input id="btnSignIn" onclick="signIn()" class="btn" type="submit" value="Login"><br/><br/>
+			<a class="regbtn" href = "regStud.html">Register as a student</a>
+			<a class="regbtn" href = "regTeacher.html"> Register as a teacher</a>
+      <br/>
+      <a class="frgbtn" onclick="forgotPassword()">Forgot your password?</a>
+
+	</div>
 </center>
 <script>
-// Initialize Firebase
- var config = {
-   apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
-   authDomain: "iwtproj.firebaseapp.com",
-   databaseURL: "https://iwtproj.firebaseio.com",
-   projectId: "iwtproj",
-   storageBucket: "iwtproj.appspot.com",
-   messagingSenderId: "417785185411"
- };
-  firebase.initializeApp(config);
-var papername= 'testOne';
-var sem = 5;
-var branch = 'Computer Science';
-var maxmarks=50;
-var question=document.getElementById("questionEntry");
-var marks=document.getElementById("marksEntry");
-  function mcheck(){
-    if (marks.value < maxmarks && question.value != "") {
-      maxmarks = maxmarks - marks;
-      vsave(marks.value,sem,papername,branch,question.value)
-    } else {
-      alert("Entered value for marks is invalid.")
-    }
-  }
+ // Initialize Firebase
 
-function vsave(marks,sem,papername,branch,question){
-var database = firebase.database()
-alert(marks);
-var uid = Math.floor(Math.random() * 10001);
-database.ref('papers').child(uid).set({
-  one: sem
-})
+  var config = {
+    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+    authDomain: "iwtproj.firebaseapp.com",
+    databaseURL: "https://iwtproj.firebaseio.com",
+    projectId: "iwtproj",
+    storageBucket: "iwtproj.appspot.com",
+    messagingSenderId: "417785185411"
+  };
+  firebase.initializeApp(config);
+
+  function signIn(){
+  const email = document.getElementById("txtEmail").value;
+  const pass = document.getElementById("txtPassword").value;
+  firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+
+      if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
+      } else {
+          alert(errorMessage);
+      }
+      console.log(error);
+  });
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        changePage(email);
+    } else {
+      alert("Not logged in!");
+    }
+  });
 }
+
+function changePage(email){
+  var ref = firebase.database().ref("teachers");
+  ref.orderByChild("username").equalTo(email).on("child_added", function(snapshot) {
+  if(snapshot.key>0){
+    window.location.assign('./homeTeacher.html');
+    //console.log("reroute to teacher");
+  }
+});
+setTimeout( function(){
+  window.location.assign('./homeStud.html');
+  }, 1400 );
+}
+
+function forgotPassword() {
+  const email = document.getElementById("txtEmail").value;
+  firebase.auth().sendPasswordResetEmail(email)
+  .then(alert('Reset Email has been sent to your Email ID!'))
+   //.catch(this.forgotPasswordFail.bind(this));
+}
+
 </script>
 </body>
 </html>
-
-
-function upl(marks,ques){
-  var tref = firebase.database().ref("teachers/");
-  tref.orderByChild("username").on("child_added", function(data) {
-    arr.push(data.val().username);
-  console.log(arr);  });
-
-  .then(function(user) {
-    changePage(email);
-  })
