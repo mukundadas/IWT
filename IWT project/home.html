@@ -83,12 +83,14 @@ function changePage(email){
   ref.orderByChild("username").equalTo(email).on("child_added", function(snapshot) {
   if(snapshot.key>0){
     window.location.assign('./homeTeacher.html');
-    //console.log("reroute to teacher");
   }
 });
-setTimeout( function(){
+var ref = firebase.database().ref("students");
+ref.orderByChild("username").equalTo(email).on("child_added", function(snapshot) {
+if(snapshot.key>0){
   window.location.assign('./homeStud.html');
-  }, 1400 );
+}
+});
 }
 
 function forgotPassword() {
