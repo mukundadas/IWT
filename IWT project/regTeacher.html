@@ -78,8 +78,7 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
 
   function RegisterTeacherInfo(emailID,firstname,lastname,dept){
     var database = firebase.database()
-    var uid = Math.floor(Math.random() * 10001);
-    database.ref('teachers').child(uid).set({
+    database.ref('teachers').push({
       username: emailID,
       FirstName: firstname,
       LastName: lastname,
