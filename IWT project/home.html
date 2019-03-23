@@ -97,7 +97,7 @@ function forgotPassword() {
   const email = document.getElementById("txtEmail").value;
   firebase.auth().sendPasswordResetEmail(email)
   .then(alert('Reset Email has been sent to your Email ID!'))
-   //.catch(this.forgotPasswordFail.bind(this));
+   .catch(this.forgotPasswordFail.bind(this));
 }
 
 </script>
