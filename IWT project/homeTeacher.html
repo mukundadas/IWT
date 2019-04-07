@@ -89,7 +89,7 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
         <center><a class="button" onclick="openForm()">Upload new question paper</a></center>
 
         <div class="form-popup" id="myForm">
-          <form action=QuestUpload.html" class="form-container">
+          <form action="UploadQuestions.html" class="form-container" method="GET">
             <h1 align="center">Question paper</h1>
             <label class="headinglbl"><b>Branch<b><sup>*</sup></label>
             <br><select id="selDept">
@@ -107,7 +107,7 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
             <br><label id="marks" class="headinglbl"><b>Select marks:<b></label>
               <input type="radio" name="marks" value="50">50
               <input type="radio" name="marks" value="100">100</br>
-              <br><a href="UploadQuestions.html">Next</a></br>
+              <br><input type="submit"></br>
             </form>
         </div>
       </div>
