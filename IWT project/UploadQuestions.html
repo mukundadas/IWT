@@ -26,6 +26,7 @@
     <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
       <br/><br/>
   <h1 class="heading">Enter the Question</h1>
+  <h6 id="dets"></h6>
   <textarea id="QuestTxt" rows='10' cols='100' onfocus="this.value=''">
   </textarea> </br>
   <h2 class="heading"> Enter the alloted marks</h2>
@@ -43,9 +44,28 @@ var config = {
   messagingSenderId: "417785185411"
 };
 firebase.initializeApp(config);
-var papername = "Internet and web Technologies";
-var sem = 6;
-var branch = "computer Science&Engineering"
+
+//var papername = "Internet and web Technologies";
+//var sem = 6;
+//var branch = "computer Science&Engineering";
+
+window.onload = function () {
+  var url = document.location.href,
+          params = url.split('?')[1].split('&'),
+          data = {}, tmp;
+  for (var i = 0, l = params.length; i < l; i++) {
+    tmp = params[i].split('=');
+    data[tmp[0]] = tmp[1];
+  }
+  var sem = data['Semester'];
+  var papername = data['Subject'];
+  var branch = data['Branch'];
+  var marks = data['marks'];
+  //console.log(data);
+  //document.getElementById('here').innerHTML = data.name;
+  document.getElementById('dets').innerHTML="Your current details are:<br>Sem:"+sem+" Sub:"+papername+" Dept:"+branch+" Marks:"+marks;
+}
+
 document.getElementById("AddBtn").addEventListener('click', e=>{
   const question = document.getElementById("QuestTxt").value;
   const marks = document.getElementById("MarksTxt").value;
