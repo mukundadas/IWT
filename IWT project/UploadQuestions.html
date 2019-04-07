@@ -45,9 +45,10 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//var papername = "Internet and web Technologies";
-//var sem = 6;
-//var branch = "computer Science&Engineering";
+var papername;
+var sem;
+var branch;
+var marks;
 
 window.onload = function () {
   var url = document.location.href,
@@ -57,10 +58,10 @@ window.onload = function () {
     tmp = params[i].split('=');
     data[tmp[0]] = tmp[1];
   }
-  var sem = data['Semester'];
-  var papername = data['Subject'];
-  var branch = data['Branch'];
-  var marks = data['marks'];
+  sem = data['Semester'];
+  papername = data['Subject'];
+  branch = data['Branch'];
+  marks = data['marks'];
   //console.log(data);
   //document.getElementById('here').innerHTML = data.name;
   document.getElementById('dets').innerHTML="Your current details are:<br>Sem:"+sem+" Sub:"+papername+" Dept:"+branch+" Marks:"+marks;
