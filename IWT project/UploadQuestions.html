@@ -70,8 +70,17 @@ window.onload = function () {
 document.getElementById("AddBtn").addEventListener('click', e=>{
   const question = document.getElementById("QuestTxt").value;
   const marks = document.getElementById("MarksTxt").value;
-  uploadToDB(question,marks)
+  verify(question, marks);
 })
+
+function verify(currentquestion, currentmarks){
+  if (currentmarks < marks) {
+    marks = marks - currentmarks
+    uploadToDB(currentquestion, currentmarks);
+  } else {
+    alert("Marks alloted to this question is invalid")
+  }
+}
 
 function uploadToDB(currentQuestion,currentMarks){
   var database = firebase.database()
