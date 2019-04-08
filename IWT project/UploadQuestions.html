@@ -10,13 +10,14 @@
     div{background-color: white;
     opacity: 0.85;
    	width:800px;
-   	height:600px;
+   	height:680px;
    	border-radius: 15px;}
     input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;font-size: 20px;background-color: lightgrey; color:black; border-radius: 10px}
     textarea{background-color: lightgrey}
     h1{font-family: Arial, Helvetica, serif;font-style: italic;font-size: 40px}
     h2{font-family: Arial, Helvetica, serif;font-style: italic;font-size: 25px}
     input.entries{height:25px;border-radius: 5px; background-color: lightgrey; width: 100px;}
+    label.MarksRemaining{font-family: Arial, Helvetica, serif;font-style: italic;font-size: 20px}
   </style>
 </head>
 <body>
@@ -31,6 +32,7 @@
   </textarea> </br>
   <h2 class="heading"> Enter the alloted marks</h2>
   <input id="MarksTxt" class="entries" type = "text" size="50" onfocus="this.value=''"><br/><br/>
+  <label class="MarksRemaining" id='mm'>Marks remaining: 100 </label> <br/><br/>
   <input id="AddBtn" class="btn" type="submit" value="Add">
 </div>
 </center>
@@ -62,6 +64,8 @@ window.onload = function () {
   papername = data['Subject'];
   branch = data['Branch'];
   marks = data['marks'];
+  let lbl = document.getElementById('mm');
+  lbl.innerHTML = "Remaining Marks: "+ marks;
   //console.log(data);
   //document.getElementById('here').innerHTML = data.name;
   document.getElementById('dets').innerHTML="Your current details are:<br>Sem:"+sem+" Sub:"+papername+" Dept:"+branch+" Marks:"+marks;
@@ -76,6 +80,8 @@ document.getElementById("AddBtn").addEventListener('click', e=>{
 function verify(currentquestion, currentmarks){
   if (currentmarks < marks) {
     marks = marks - currentmarks
+    let lbl = document.getElementById('mm');
+    lbl.innerHTML = "Remaining Marks: " + marks;
     uploadToDB(currentquestion, currentmarks);
   } else {
     alert("Marks alloted to this question is invalid")

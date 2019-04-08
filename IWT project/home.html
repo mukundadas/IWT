@@ -72,8 +72,6 @@ a.frgbtn{color:red;}
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         changePage(email);
-    } else {
-      alert("Not logged in!");
     }
   });
 }
@@ -82,7 +80,8 @@ function changePage(email){
   var ref = firebase.database().ref("teachers");
   ref.orderByChild("username").equalTo(email).on("child_added", function(snapshot) {
   if(snapshot.key>0){
-    window.location.assign('./homeTeacher.html');
+    retrieveUserInfo();
+    //window.location.assign('./homeTeacher.html');
   }
 });
 var ref = firebase.database().ref("students");

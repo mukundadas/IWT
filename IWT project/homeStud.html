@@ -1,11 +1,40 @@
-<<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-      <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
-    <meta charset="utf-8">
-    <title>Student</title>
-  </head>
-  <body>
-    <p>Welcome to student</p>
-  </body>
+<html>
+<head>
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+  <title> Student Home </title>
+  <style type='text/css'>
+  body{background-image: url("./images/background.jpg");background-position: center center;
+      background-size: 100% 100%; }
+    h1{font-family: Arial, Helvetica, serif;font-style: italic;}
+  div{
+      background-color: white;
+      opacity: 0.85;
+      width:600px;
+      height:600px;
+      border-radius: 15px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <center> <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" ></center>
+    <br/>
+    <center><h1> Student Portal</h1></center>
+  </div>
+  <script>
+  var config = {
+    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+    authDomain: "iwtproj.firebaseapp.com",
+    databaseURL: "https://iwtproj.firebaseio.com",
+    projectId: "iwtproj",
+    storageBucket: "iwtproj.appspot.com",
+    messagingSenderId: "417785185411"
+  };
+  firebase.initializeApp(config);
+
+  </script>
+</body>
 </html>
