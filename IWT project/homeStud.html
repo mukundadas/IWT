@@ -18,11 +18,19 @@
     }
   </style>
 </head>
-<body>
+<body onload="FetchQuestionPaperList()">
   <div>
+    <br/>
     <center> <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" ></center>
     <br/>
     <center><h1> Student Portal</h1></center>
+    <center><table>
+      <table id="myTableData"  border="1" cellpadding="2">
+      <tr>
+          <td><b>Question Papers</b></td>
+          <td>&nbsp;</td>
+      </tr>
+  </table></center>
   </div>
   <script>
   var config = {
@@ -34,6 +42,23 @@
     messagingSenderId: "417785185411"
   };
   firebase.initializeApp(config);
+
+    function FetchQuestionPaperList(){
+      var ref = firebase.database().ref("papers");
+      ref.child("CS").child("6").on("child_added", function(snapshot) {
+        var data = snapshot.key;
+        addRow(data);
+      });
+  }
+
+  function addRow(papers){
+      let table = document.getElementById("myTableData");
+      var rowCount = table.rows.length;
+      var row = table.insertRow(rowCount);
+
+      row.insertCell(0).innerHTML = papers.value;
+      row.insertCell(1).innerHTML = '<input type="button" value = "Answer">';
+  }
 
   </script>
 </body>
