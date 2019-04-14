@@ -43,22 +43,27 @@
   };
   firebase.initializeApp(config);
 
+  var questionPaperNames = [];
+
     function FetchQuestionPaperList(){
       var ref = firebase.database().ref("papers");
       ref.child("CS").child("6").on("child_added", function(snapshot) {
         var data = snapshot.key;
-        addRow(data);
+        questionPaperNames.push(data);
+        addRow(questionPaperNames);
       });
+
   }
 
   function addRow(papers){
       let table = document.getElementById("myTableData");
       var rowCount = table.rows.length;
       var row = table.insertRow(rowCount);
-
+      for (questionpaper in questionPaperNames){
       row.insertCell(0).innerHTML = papers.value;
       row.insertCell(1).innerHTML = '<input type="button" value = "Answer">';
   }
+}
 
   </script>
 </body>
