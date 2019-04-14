@@ -28,7 +28,7 @@
       <table id="myTableData"  border="1" cellpadding="2">
       <tr>
           <td><b>Question Papers</b></td>
-          <td>&nbsp;</td>
+          <td>&nbsp</td>
       </tr>
   </table></center>
   </div>
@@ -47,23 +47,29 @@
 
     function FetchQuestionPaperList(){
       var ref = firebase.database().ref("papers");
-      ref.child("CS").child("6").on("child_added", function(snapshot) {
-        var data = snapshot.key;
-        questionPaperNames.push(data);
-        addRow(questionPaperNames);
+      ref.child("CS").child("6").orderByKey();
+      ref.once("value").then(function(snapshot){
+        snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key;
+          addRow(key);
+        });
       });
 
+  }
+
+  function PaperSelected(paperName){
+    console.log(paperName)
   }
 
   function addRow(papers){
       let table = document.getElementById("myTableData");
       var rowCount = table.rows.length;
       var row = table.insertRow(rowCount);
-      for (questionpaper in questionPaperNames){
-      row.insertCell(0).innerHTML = papers.value;
-      row.insertCell(1).innerHTML = '<input type="button" value = "Answer">';
-  }
+      row.insertCell(0).innerHTML = papers;
+      row.insertCell(1).innerHTML = '<input type="button" value="Answer" onclick="PaperSelected(papers)">'
 }
+
+
 
   </script>
 </body>
