@@ -1,0 +1,68 @@
+<html>
+<head>
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<title>Answer</title>
+<style type='text/css'>
+body{background-image: url('./images/IMG_1900.jpg');background-position: center center;
+  background-size: 100% 100%; }
+  div{
+  	background-color: white;
+  	opacity: 0.85;
+  	width:700px;
+  	height:600px;
+  	border-radius: 15px;
+  }
+  p.question{font-family: Arial, Helvetica, sans-serif;font-size: 20px;}
+  label{font-family: Arial, Helvetica, sans-serif;font-size: 20px;}
+  textarea{background-color: lightgrey}
+</style>
+</head>
+<body onload="fetchChildIDs()">
+  <center><div>
+    <br/>
+    <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png">
+      <br/>
+    <p class="question">Explain the working of a cathode ray tube?</p>
+    <label> 10 marks</label>
+    <br/><br/>
+    <textarea id="QuestTxt" rows='10' cols='90' onfocus="this.value=''">
+    </textarea> </br>
+  </div>
+</center>
+<script>
+var config = {
+  apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+  authDomain: "iwtproj.firebaseapp.com",
+  databaseURL: "https://iwtproj.firebaseio.com",
+  projectId: "iwtproj",
+  storageBucket: "iwtproj.appspot.com",
+  messagingSenderId: "417785185411"
+};
+firebase.initializeApp(config);
+
+function fetchChildIDs(){
+  var ref = firebase.database().ref("papers").child("CS").child("6").child("CG");
+ref.once("value")
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var key = childSnapshot.key;
+      fetchQuestions(key);
+ });
+  });
+}
+
+function fetchQuestions(autoIDs){
+  var ref = firebase.database().ref("papers").child("6").child("CG").child(autoIDs).
+  ref.once("value")
+  .then(function(snapshot){
+    snapshot.forEach(function(childSnapshot) {
+      var question = childSnapshot.child("Quest").val();
+      console.log(question);
+ });
+  })
+}
+
+</script>
+</body>
+</html>

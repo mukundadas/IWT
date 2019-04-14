@@ -58,19 +58,19 @@
   }
 
   function PaperSelected(paperName){
-    console.log(paperName)
+    console.log(paperName.value)
   }
-var papers;
+
+var selectedpaper;
+
   function addRow(papers){
+      selectedpaper = papers;
       let table = document.getElementById("myTableData");
       var rowCount = table.rows.length;
       var row = table.insertRow(rowCount);
       row.insertCell(0).innerHTML = papers;
-      row.insertCell(1).innerHTML = '<input type="button" value="Answer" onclick="PaperSelected(papers)">';
+      row.insertCell(1).innerHTML = '<input type="button" value="Answer" onclick="PaperSelected(selectedpaper)">';
 }
-
-
-
   </script>
 </body>
 </html>
