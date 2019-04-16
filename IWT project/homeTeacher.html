@@ -11,7 +11,7 @@
       	background-color: white;
       	opacity: 0.85;
       	width:600px;
-      	height:600px;
+      	height:800px;
       	border-radius: 15px;
         margin-left: auto;
         margin-right: auto;
@@ -86,8 +86,15 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
       </br>
         <center><image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" ></center>
         <center><h1>Teacher Portal</h1></center>
-        <center><a class="button" onclick="openForm()">Upload new question paper</a></center>
-
+        <center><a class="button" onclick="openForm()">Upload new question paper</a></center> <br/><br/>
+        <center><a class="button" onclick="AnswerSheetList(1)">1st semester</a></center><br/><br/>
+        <center><a class="button" onclick="AnswerSheetList(2)">2nd semester</a></center><br/><br/>
+        <center><a class="button" onclick="AnswerSheetList(3)">3rd semester</a></center><br/><br/>
+        <center><a class="button" onclick="AnswerSheetList(4)">4th semester</a></center><br/><br/>
+        <center><a class="button" onclick="AnswerSheetList(5)">5th semester</a></center><br/><br/>
+        <center><a class="button" onclick="AnswerSheetList(6)">6th semester</a></center><br/><br/>
+        <center><a class="button" onclick="AnswerSheetList(7)">7th semester</a></center><br/><br/>
+        <center><a class="button" onclick="AnswerSheetList(8)">8th semester</a></center><br/><br/>
         <div class="form-popup" id="myForm">
           <form action="UploadQuestions.html" class="form-container" method="GET">
             <h1 align="center">Question paper</h1>
@@ -109,11 +116,16 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
               <input type="radio" name="marks" value="100">100</br>
               <br><input type="submit"></br>
             </form>
+
         </div>
       </div>
       <script>
       function openForm() {
         document.getElementById("myForm").style.display = "block";
+      }
+
+      function AnswerSheetList(sem){
+          console.log(sem);
       }
     </script>
     </body>

@@ -13,21 +13,23 @@ body{background-image: url('./images/IMG_1900.jpg');background-position: center 
   	height:600px;
   	border-radius: 15px;
   }
+  input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;font-size: 20px;background-color: lightgrey; color:black; border-radius: 10px}
   p.question{font-family: Arial, Helvetica, sans-serif;font-size: 20px;}
   label{font-family: Arial, Helvetica, sans-serif;font-size: 20px;}
   textarea{background-color: lightgrey}
 </style>
 </head>
-<body onload="fetchChildIDs()">
+<body onload="fetchQuestions()">
   <center><div>
     <br/>
     <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png">
       <br/>
-    <p class="question">Explain the working of a cathode ray tube?</p>
-    <label> 10 marks</label>
+    <p id="questionlbl" class="question">Loading....</p>
+    <label id="markslbl"> -- marks</label>
     <br/><br/>
-    <textarea id="QuestTxt" rows='10' cols='90' onfocus="this.value=''">
-    </textarea> </br>
+    <textarea id="AnswerTxt" rows='10' cols='90' onfocus="this.value=''">
+    </textarea> </br> <br/>
+    <input id="btnSignIn" onclick="saveanswers(indexnumber)" class="btn" type="submit" value="Next">
   </div>
 </center>
 <script>
@@ -41,26 +43,43 @@ var config = {
 };
 firebase.initializeApp(config);
 
-function fetchChildIDs(){
-  var ref = firebase.database().ref("papers").child("CS").child("6").child("CG");
+var marks = [];
+var questions = [];
+var indexnumber = 0;
+
+function fetchQuestions(){
+
+  var ref = firebase.database().ref("papers").child("CS").child("6").child("python");
 ref.once("value")
   .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
-      var key = childSnapshot.key;
-      fetchQuestions(key);
+      var key = childSnapshot.val();
+      var currentmarks = childSnapshot.child("Marks").val();
+      var currentquestion = childSnapshot.child("Quest").val();
+      marks.push(currentmarks);
+      questions.push(currentquestion);
+      setupScreen(indexnumber);
  });
   });
 }
 
-function fetchQuestions(autoIDs){
-  var ref = firebase.database().ref("papers").child("6").child("CG").child(autoIDs).
-  ref.once("value")
-  .then(function(snapshot){
-    snapshot.forEach(function(childSnapshot) {
-      var question = childSnapshot.child("Quest").val();
-      console.log(question);
- });
+function setupScreen(indexnumber){
+    let questionlabel = document.getElementById('questionlbl');
+    questionlabel.innerHTML = questions[indexnumber];
+    let markslabel = document.getElementById('markslbl');
+    markslabel.innerHTML = marks[indexnumber]+ " Marks";
+}
+
+function saveanswers(){
+  const answertxt = document.getElementById('AnswerTxt').value;
+  var database = firebase.database()
+  database.ref('AnswerScripts').child("CS").child("6").child("StudentName").child("python").push({
+    Quest: questions[indexnumber],
+    AllotedMarks: marks[indexnumber],
+    answer: answertxt
   })
+  indexnumber += 1;
+  setupScreen(indexnumber);
 }
 
 </script>
