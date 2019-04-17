@@ -1,6 +1,8 @@
 
 <html lang="en" dir="ltr">
   <head>
+      <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
       <link rel="icon" href="https://nptel.ac.in/LocalChapter/Assets/college_logo/846_logo.png">
     <title>Teacher</title>
   <style type="text/css">
@@ -95,6 +97,7 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
         <center><a class="button" onclick="AnswerSheetList(6)">6th semester</a></center><br/><br/>
         <center><a class="button" onclick="AnswerSheetList(7)">7th semester</a></center><br/><br/>
         <center><a class="button" onclick="AnswerSheetList(8)">8th semester</a></center><br/><br/>
+          <center><button id="logout">Log Out</button></center>
         <div class="form-popup" id="myForm">
           <form action="UploadQuestions.html" class="form-container" method="GET">
             <h1 align="center">Question paper</h1>
@@ -116,11 +119,33 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
               <input type="radio" name="marks" value="100">100</br>
               <br><input type="submit"></br>
             </form>
-
         </div>
       </div>
       <script>
-      function openForm() {
+          var config = {
+              apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+              authDomain: "iwtproj.firebaseapp.com",
+              databaseURL: "https://iwtproj.firebaseio.com",
+              projectId: "iwtproj",
+              storageBucket: "iwtproj.appspot.com",
+              messagingSenderId: "417785185411"
+          };
+          firebase.initializeApp(config);
+
+          var name=localStorage.getItem("email");
+          console.log(name);
+
+          document.getElementById("logout").onclick= () => {
+              firebase.auth().signOut().then(window.location.assign('./home.html'));
+          }
+
+          firebase.auth().onAuthStateChanged(function(user) {
+              if (!user) {
+                  window.location.assign('./home.html');
+              }
+          });
+
+          function openForm() {
         document.getElementById("myForm").style.display = "block";
       }
 
