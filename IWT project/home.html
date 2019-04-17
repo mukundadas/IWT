@@ -53,40 +53,46 @@ a.frgbtn{color:red;}
     storageBucket: "iwtproj.appspot.com",
     messagingSenderId: "417785185411"
   };
+
   firebase.initializeApp(config);
 
+  let email="";
+
   function signIn(){
-  const email = document.getElementById("txtEmail").value;
-  const pass = document.getElementById("txtPassword").value;
-  firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+ 	  email = document.getElementById("txtEmail").value;
+	  const pass = document.getElementById("txtPassword").value;
+  firebase.auth().signInWithEmailAndPassword(email, pass).then(changePage(email)).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
 
       if (errorCode === 'auth/wrong-password') {
           alert('Wrong password.');
+		  document.location.reload(true);
       } else {
           alert(errorMessage);
       }
       console.log(error);
   });
+  /*
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         changePage(email);
     }
-  });
+  });*/
 }
 
 function changePage(email){
   var ref = firebase.database().ref("teachers");
   ref.orderByChild("username").equalTo(email).on("child_added", function(snapshot) {
   if(snapshot.key>0){
-    retrieveUserInfo();
-    //window.location.assign('./homeTeacher.html');
+	  localStorage.setItem("email",email);
+    window.location.assign('./homeTeacher.html');
   }
 });
 var ref = firebase.database().ref("students");
 ref.orderByChild("username").equalTo(email).on("child_added", function(snapshot) {
 if(snapshot.key>0){
+	localStorage.setItem("email",email);
   window.location.assign('./homeStud.html');
 }
 });
