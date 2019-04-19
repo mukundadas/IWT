@@ -4,8 +4,8 @@
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
 <title>Student List</title>
 </head>
-<body onload="fetchStudentList()">
-  <script type="text/jaascript">
+<body onload="studentAnswerSheets()">
+  <script>
   var config = {
     apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
     authDomain: "iwtproj.firebaseapp.com",
@@ -17,16 +17,15 @@
 
   firebase.initializeApp(config);
 
-  function fetchStudentList(){
-    let databaseref = firebase.database().ref("AnswerScripts");
-    databaseref.child("CS").child("6").orderByKey();
-    ref.once("value").then(function(snapshot){
-      snapshot.forEach(function(childSnapshot) {
-        var key = childSnapshot.key;
-        console.log(key);
-      });
+function studentAnswerSheets(){
+  var ref = firebase.database().ref("AnswerScripts").child("CS").child("6")
+  ref.once("value").then(function(snapshot){
+    snapshot.forEach(function(childSnapshot) {
+      var key = childSnapshot.key;
+      console.log(key);
     });
-  }
+  });
+}
 
   </script>
 </body>
