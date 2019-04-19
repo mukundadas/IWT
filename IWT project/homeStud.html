@@ -48,11 +48,11 @@
     firebase.auth().signOut().then(window.location.assign('./home.html'));
   }
 
-  firebase.auth().onAuthStateChanged(function(user) {
+  /*firebase.auth().onAuthStateChanged(function(user) {
     if (!user) {
       window.location.assign('./home.html');
     }
-  });
+  });*/
 
 
   var name=localStorage.getItem("email");
