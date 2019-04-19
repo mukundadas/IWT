@@ -1,0 +1,47 @@
+<html>
+<head>
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+  <title> Answer Sheet</title>
+  <style type="text/css">
+    h1{font-family: Arial, Helvetica, serif;font-style: italic;}
+    body{background-image: url('./images/IMG_0194.jpg');background-position: center center;
+      background-size: 100% 100%;}
+    div{background-color: white;
+      opacity: 0.85;
+     	width:800px;
+     	height:680px;
+     	border-radius: 15px;}
+
+    </style>
+</head>
+<body>
+  <div>
+    <br/>
+    <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
+      <br/><br/>
+  <h1 class="heading">Enter the Question</h1>
+  <h6 id="dets"></h6>
+  <textarea id="QuestTxt" rows='10' cols='100' onfocus="this.value=''">
+  </textarea> </br>
+  <h2 class="heading"> Enter the alloted marks</h2>
+  <input id="MarksTxt" class="entries" type = "text" size="50" onfocus="this.value=''"><br/><br/>
+  <label class="MarksRemaining" id='mm'>Marks remaining: 100 </label> <br/><br/>
+  <input id="AddBtn" class="btn" type="submit" value="Add">
+</div>
+
+  <script>
+  var config = {
+    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+    authDomain: "iwtproj.firebaseapp.com",
+    databaseURL: "https://iwtproj.firebaseio.com",
+    projectId: "iwtproj",
+    storageBucket: "iwtproj.appspot.com",
+    messagingSenderId: "417785185411"
+  };
+  firebase.initializeApp(config);
+
+  </script>
+</body>
+
+</html>

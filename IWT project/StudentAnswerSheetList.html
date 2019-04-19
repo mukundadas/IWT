@@ -3,8 +3,19 @@
   <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
 <title>Student List</title>
+<style>
+body{background-image: url("./images/background.jpg");background-position: center center;
+    background-size: 100% 100%; }
+</style>
 </head>
 <body onload="studentAnswerSheets()">
+  <center><h1>Students</h1></center>
+  <center><table id="myTableData"  border="1" cellpadding="2">
+  <tr>
+      <td><b>Students</b></td>
+      <td>&nbsp</td>
+  </tr>
+</table></center>
   <script>
   var config = {
     apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
@@ -22,9 +33,22 @@ function studentAnswerSheets(){
   ref.once("value").then(function(snapshot){
     snapshot.forEach(function(childSnapshot) {
       var key = childSnapshot.key;
-      console.log(key);
+      addRow(key);
     });
   });
+}
+
+function studentSelected(studentName){
+    console.log(studentName)
+}
+
+function addRow(student){
+    selectedstudent = student;
+    let table = document.getElementById("myTableData");
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+    row.insertCell(0).innerHTML = student;
+    row.insertCell(1).innerHTML = '<input type="button" value="Answer" onclick="studentSelected(selectedstudent)">';
 }
 
   </script>

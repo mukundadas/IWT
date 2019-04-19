@@ -61,8 +61,7 @@
   var questionPaperNames = [];
 
     function FetchQuestionPaperList(){
-      var ref = firebase.database().ref("papers");
-      ref.child("CS").child("6").orderByKey();
+      var ref = firebase.database().ref("papers").child("CS").child("6");
       ref.once("value").then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key;
@@ -73,7 +72,7 @@
   }
 
   function PaperSelected(paperName){
-    console.log(paperName.value)
+    console.log(paperName)
   }
 
 var selectedpaper;
