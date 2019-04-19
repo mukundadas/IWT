@@ -1,7 +1,32 @@
 <html>
 <head>
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
 <title>Student List</title>
 </head>
-<body>
+<body onload="studentAnswerSheets()">
+  <script>
+  var config = {
+    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+    authDomain: "iwtproj.firebaseapp.com",
+    databaseURL: "https://iwtproj.firebaseio.com",
+    projectId: "iwtproj",
+    storageBucket: "iwtproj.appspot.com",
+    messagingSenderId: "417785185411"
+  };
+
+  firebase.initializeApp(config);
+
+function studentAnswerSheets(){
+  var ref = firebase.database().ref("AnswerScripts").child("CS").child("6")
+  ref.once("value").then(function(snapshot){
+    snapshot.forEach(function(childSnapshot) {
+      var key = childSnapshot.key;
+      console.log(key);
+    });
+  });
+}
+
+  </script>
 </body>
 </html>
