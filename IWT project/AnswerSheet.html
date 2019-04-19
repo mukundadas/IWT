@@ -1,0 +1,73 @@
+<html>
+<head>
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+  <title> Answer Sheet</title>
+  <style type="text/css">
+    h2{font-family: Arial, Helvetica, serif;font-style: italic;}
+    body{background-image: url('./images/IMG_0194.jpg');background-position: center center;
+      background-size: 100% 100%;}
+    div{background-color: white;
+      opacity: 0.85;
+     	width:800px;
+     	height:680px;
+     	border-radius: 15px;}
+
+    </style>
+</head>
+<body onload="retrieveQuestions()">
+  <center><div>
+    <br/>
+    <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
+      <br/><br/>
+  <h2 class="questiontxt"> LOADING....</h2>
+  <h3 class="answertxt"> LOADING....</h3>
+  <h3 class="allotedmarkstxt"> -- </h3>
+</div>
+  </center>
+  <script>
+  var config = {
+    apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
+    authDomain: "iwtproj.firebaseapp.com",
+    databaseURL: "https://iwtproj.firebaseio.com",
+    projectId: "iwtproj",
+    storageBucket: "iwtproj.appspot.com",
+    messagingSenderId: "417785185411"
+  };
+  firebase.initializeApp(config);
+
+  var marks = [];
+  var questions = [];
+  var answers = [];
+  var indexnumber = 0;
+
+  function retrieveQuestions(){
+    var ref = firebase.database().ref("AnswerScripts").child("CS").child("6").child("StudentName").child("python");
+    ref.once("value")
+    .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.val();
+        var currentmarks = childSnapshot.child("AllotedMarks").val();
+        var currentquestion = childSnapshot.child("Quest").val();
+        var currentanswer = childSnapshot.child("answer").val();
+        marks.push(currentmarks);
+        questions.push(currentquestion);
+        answers.push(currentanswer);
+        setupScreen(indexnumber);
+   });
+    });
+  }
+
+  function setupScreen(indexnumber){
+    //let questionlabel = document.getElementById('questiontxt');
+    //questionlabel.innerHTML = questions[indexnumber];
+    let answerlabel = document.getElementById('answertxt');
+    answerlabel.innerHTML = answers[indexnumber];
+    let AllotedMarksLabel = document.getElementById('allotedmarkstxt');
+    AllotedMarksLabel.innerHTML = marks[indexnumber] + " marks"
+  }
+
+  </script>
+</body>
+
+</html>

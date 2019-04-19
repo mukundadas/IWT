@@ -48,7 +48,6 @@ var questions = [];
 var indexnumber = 0;
 
 function fetchQuestions(){
-
   var ref = firebase.database().ref("papers").child("CS").child("6").child("python");
 ref.once("value")
   .then(function(snapshot) {
