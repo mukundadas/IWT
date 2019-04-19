@@ -12,7 +12,8 @@
      	width:800px;
      	height:680px;
      	border-radius: 15px;}
-
+      input.entries{height:25px;border-radius: 5px; background-color: lightgrey; width: 100px;}
+      input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;font-size: 20px;background-color: lightgrey; color:black; border-radius: 10px}
     </style>
 </head>
 <body onload="retrieveQuestions()">
@@ -20,9 +21,12 @@
     <br/>
     <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
       <br/><br/>
-  <h2 class="questiontxt"> LOADING....</h2>
-  <h3 class="answertxt"> LOADING....</h3>
-  <h3 class="allotedmarkstxt"> -- </h3>
+  <h2 id="questiontxt"> LOADING....</h2>
+  <h3 id="answertxt"> LOADING....</h3>
+  <h3 id="allotedmarkstxt"> -- </h3>
+  <label> Enter the Marks </label>
+  <input id="MarksTxt" class="entries" type = "text" size="50" onfocus="this.value=''"><br/><br/>
+  <input id="MarksGranted" onclick="initNextScreen(indexnumber)" class="btn" type="submit" value="Next">
 </div>
   </center>
   <script>
@@ -40,6 +44,8 @@
   var questions = [];
   var answers = [];
   var indexnumber = 0;
+  var totalquestions = 0;
+  var totalmarksearned = 0;
 
   function retrieveQuestions(){
     var ref = firebase.database().ref("AnswerScripts").child("CS").child("6").child("StudentName").child("python");
@@ -47,6 +53,7 @@
     .then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         var key = childSnapshot.val();
+        totalquestions = totalquestions + 1;
         var currentmarks = childSnapshot.child("AllotedMarks").val();
         var currentquestion = childSnapshot.child("Quest").val();
         var currentanswer = childSnapshot.child("answer").val();
@@ -59,12 +66,24 @@
   }
 
   function setupScreen(indexnumber){
-    //let questionlabel = document.getElementById('questiontxt');
-    //questionlabel.innerHTML = questions[indexnumber];
+    let questionlabel = document.getElementById('questiontxt');
+    questionlabel.innerHTML = questions[indexnumber];
     let answerlabel = document.getElementById('answertxt');
     answerlabel.innerHTML = answers[indexnumber];
     let AllotedMarksLabel = document.getElementById('allotedmarkstxt');
     AllotedMarksLabel.innerHTML = marks[indexnumber] + " marks"
+  }
+
+  function initNextScreen(){
+    const marksgranted = document.getElementById("MarksTxt").value;
+    totalmarksearned = totalmarksearned + Number(marksgranted);
+    if (indexnumber+1 != totalquestions){
+      indexnumber = indexnumber + 1;
+      setupScreen(indexnumber);
+    } else {
+      alert("total marks scored is:" + totalmarksearned);
+    }
+
   }
 
   </script>
