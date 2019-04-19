@@ -82,16 +82,17 @@ a.frgbtn{color:red;}
 }
 
 function changePage(email){
-  var ref = firebase.database().ref("teachers");
+  var ref = firebase.database().ref("teachers/");
   ref.orderByChild("username").equalTo(email).on("child_added", function(snapshot) {
-  if(snapshot.key>0){
+  if(isNaN(parseInt(snapshot.key,10))){
 	  localStorage.setItem("email",email);
     window.location.assign('./homeTeacher.html');
   }
+  console.log(snapshot.key);
 });
-var ref = firebase.database().ref("students");
+var ref = firebase.database().ref("students/");
 ref.orderByChild("username").equalTo(email).on("child_added", function(snapshot) {
-if(snapshot.key>0){
+if(isNaN(parseInt(snapshot.key,10))){
 	localStorage.setItem("email",email);
   window.location.assign('./homeStud.html');
 }

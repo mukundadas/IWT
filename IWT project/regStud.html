@@ -36,7 +36,7 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
 		<input id="usn"class="entries" type = "text" name="fn" size="50"><br/><br/>
 		<label class="headinglbl">Email address<sup>*</sup></label><br/>
 		<input id="txtEmail" class="entries" type = "email" name="fn" size="50" required><br/><br/>
-		<label class="headinglbl">Enter password<sup>*</sup></label><br/>
+		<label class="headinglbl">Enter password<sup>*</sup>(min 6 chars)</label><br/>
 		<input id="txtPassword" class="entries" type = "password" name="fn" size="50" required><br/><br/>
 		<label class="headinglbl">Re-Enter password<sup>*</sup></label><br/>
 		<input class="entries" type = "password" name="fn" size="50"><br/><br/>
@@ -97,6 +97,7 @@ input.btn{font-family: Arial, Helvetica, sans-serif;width:120px;height: 40px;fon
           Usn: usn,
           Sem: sem
       })
+		alert('Registered!')
     }
 </script>
 </body>
