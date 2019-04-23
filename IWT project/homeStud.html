@@ -31,8 +31,6 @@
           <td>&nbsp</td>
       </tr>
       </table><br><br><button id="logout">Log Out</button>
-    </center>
-  </div>
   <script>
   var config = {
     apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",
@@ -65,26 +63,29 @@
       ref.once("value").then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key;
-          addRow(key);
+          addRow(String(key));
         });
       });
 
   }
 
-  function PaperSelected(paperName){
-    console.log(paperName)
+  var questionpapers = [];
+
+  function buttonclicked(paperselected){
+      console.log(paperselected);
   }
 
 var selectedpaper;
 
+
   function addRow(papers){
-      selectedpaper = papers;
       let table = document.getElementById("myTableData");
       var rowCount = table.rows.length;
       var row = table.insertRow(rowCount);
       row.insertCell(0).innerHTML = papers;
-      row.insertCell(1).innerHTML = '<input type="button" value="Answer" onclick="PaperSelected(selectedpaper)">';
+      row.insertCell(1).innerHTML = '<input type="button" value="Answer" '+'onclick=(buttonclicked("'+papers+'"))>'
 }
-  </script>
+
+</script>
 </body>
 </html>

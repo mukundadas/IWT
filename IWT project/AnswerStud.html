@@ -46,6 +46,7 @@ firebase.initializeApp(config);
 var marks = [];
 var questions = [];
 var indexnumber = 0;
+var totalMarks = 0;
 
 function fetchQuestions(){
   var ref = firebase.database().ref("papers").child("CS").child("6").child("python");
@@ -57,6 +58,7 @@ ref.once("value")
       var currentquestion = childSnapshot.child("Quest").val();
       marks.push(currentmarks);
       questions.push(currentquestion);
+      totalMarks = marks.length;
       setupScreen(indexnumber);
  });
   });
@@ -78,7 +80,12 @@ function saveanswers(){
     answer: answertxt
   })
   indexnumber += 1;
-  setupScreen(indexnumber);
+  if (indexnumber<totalMarks){
+    setupScreen(indexnumber);
+  } else {
+    alert("Exam complete!");
+  }
+
 }
 
 </script>
