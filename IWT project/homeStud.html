@@ -59,19 +59,20 @@
   var questionPaperNames = [];
 
   function fetchUserInfo(){
-    var databaseref = firebase.database().ref("students");
-    databaseref.orderByChild("username").equalTo(name).on("child_added", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var sem = childSnapshot.child("Sem").val();
-        var branch = childSnapshot.child("Dept").val();
-        console.log(sem);
-        console.log(branch);
+    var databaseref = firebase.database().ref("students/");
+    databaseref.once("value")
+      .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.val();
+          var branch = childSnapshot.child("Dept").val();
+          var sem = childSnapshot.child("Sem").val();
+          FetchQuestionPaperList(branch,sem);
+     });
       });
-    });
   }
 
-    function FetchQuestionPaperList(){
-      var ref = firebase.database().ref("papers").child("CS").child("6");
+    function FetchQuestionPaperList(branch,sem){
+      var ref = firebase.database().ref("papers").child(branch).child(sem);
       ref.once("value").then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key;
