@@ -18,7 +18,7 @@
     }
   </style>
 </head>
-<body onload="FetchQuestionPaperList()">
+<body onload="fetchUserInfo()">
   <div>
     <br/>
     <center> <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" ></center>
@@ -57,6 +57,18 @@
   console.log(name);
 
   var questionPaperNames = [];
+
+  function fetchUserInfo(){
+    var databaseref = firebase.database().ref("students");
+    databaseref.orderByChild("username").equalTo(name).on("child_added", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var sem = childSnapshot.child("Sem").val();
+        var branch = childSnapshot.child("Dept").val();
+        console.log(sem);
+        console.log(branch);
+      });
+    });
+  }
 
     function FetchQuestionPaperList(){
       var ref = firebase.database().ref("papers").child("CS").child("6");
