@@ -46,8 +46,10 @@
   var indexnumber = 0;
   var totalquestions = 0;
   var totalmarksearned = 0;
-
-
+  var sem=localStorage.getItem("sem");
+  var branch=localStorage.getItem("branch");
+  var studSel=localStorage.getItem("studentSel");
+  var subSel=localStorage.getItem("subjectSel");
   //substitue CS(branch) 6(sem) StudentName(name of the student) and python(paper selected) by fetching 
   function retrieveQuestions(){
     var ref = firebase.database().ref("AnswerScripts").child("CS").child("6").child("StudentName").child("python");

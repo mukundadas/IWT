@@ -49,7 +49,7 @@ function studentAnswerSheets(){
 }
 
 function studentSelected(studentName){
-    console.log(studentName);
+    localStorage.setItem("studentSel",studentName);
 }
 
 function addRow(student){
@@ -59,7 +59,8 @@ function addRow(student){
     row.insertCell(0).innerHTML = student;
     row.insertCell(1).innerHTML = '<input type="button" value="Answer" '+'onclick=(studentSelected("'+student+'"))>';
 }
-
+  var sem=localStorage.getItem("sem");
+  var branch=localStorage.getItem("branch");
   </script>
 </body>
 </html>

@@ -47,6 +47,10 @@ var marks = [];
 var questions = [];
 var indexnumber = 0;
 var totalMarks = 0;
+var sem=localStorage.getItem("sem");
+var branch=localStorage.getItem("branch");
+var studName=localStorage.getItem("studentName");
+var paperSel=localStorage.getItem("paperselected");
 
 function fetchQuestions(){
   var ref = firebase.database().ref("papers").child("CS").child("6").child("python"); //subsitite the actual values here

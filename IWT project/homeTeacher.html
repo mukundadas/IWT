@@ -144,16 +144,19 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
                   window.location.assign('./home.html');
               }
           });
-
+          var branch = "",var sem=0;
           function openForm() {
         document.getElementById("myForm").style.display = "block";
       }
 
       function AnswerSheetList(sem){
           //save the sem info(button selected) and branch and move to the next page(StudentAnswerSheetList)
+          localStorage.setItem("sem",sem);
+          branch=document.getElementById(selDept).value;
+          localStorage.setItem("branch",branch);
       }
 
-      var branch = ""
+
 
       function fetchTeacherInfo(){
         var databaseref = firebase.database().ref("teachers");

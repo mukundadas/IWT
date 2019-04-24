@@ -56,6 +56,7 @@
 
     function buttonclicked(selectedSubject){
       //move to AnswerSheet.html with the branch,sem,student name and the subject selected in the page(selectedSubject)
+        localStorage.setItem("subjectSel",selectedSubject);
     }
 
     function addRow(subject){
@@ -65,7 +66,9 @@
         row.insertCell(0).innerHTML = subject;
         row.insertCell(1).innerHTML = '<input type="button" value="Evaluate" '+'onclick=(buttonclicked("'+subject+'"))>'
   }
-
+    var sem=localStorage.getItem("sem");
+    var branch=localStorage.getItem("branch");
+    var studSel=localStorage.getItem("studentSel");
 
 </script>
 </body>
