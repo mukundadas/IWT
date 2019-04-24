@@ -53,26 +53,23 @@
   });*/
 
 
-  var name=localStorage.getItem("email");
-  console.log(name);
+  //var name=localStorage.getItem("email");
+  var name = "das@gmail.com"
 
   var questionPaperNames = [];
 
   function fetchUserInfo(){
-    var databaseref = firebase.database().ref("students/");
-    databaseref.once("value")
-      .then(function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-          var key = childSnapshot.val();
-          var branch = childSnapshot.child("Dept").val();
-          var sem = childSnapshot.child("Sem").val();
-          FetchQuestionPaperList(branch,sem);
-     });
-      });
+      var databaseref = firebase.database().ref("students");
+      databaseref.orderByChild("username").equalTo(name).on("child_added", function(snapshot) {
+        var data = snapshot.val();
+        var sem = data.Sem;
+        var branch = data.branch;
+        FetchQuestionPaperList(branch,sem);
+    });
   }
 
-    function FetchQuestionPaperList(branch,sem){
-      var ref = firebase.database().ref("papers").child(branch).child(sem);
+    function FetchQuestionPaperList(userbranch,usersem){
+      var ref = firebase.database().ref("papers").child("CS").child("6");
       ref.once("value").then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key;
@@ -85,7 +82,7 @@
   var questionpapers = [];
 
   function buttonclicked(paperselected){
-      console.log(paperselected);
+    
   }
 
 var selectedpaper;

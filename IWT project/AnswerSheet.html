@@ -47,6 +47,8 @@
   var totalquestions = 0;
   var totalmarksearned = 0;
 
+
+  //substitue CS(branch) 6(sem) StudentName(name of the student) and python(paper selected) by fetching 
   function retrieveQuestions(){
     var ref = firebase.database().ref("AnswerScripts").child("CS").child("6").child("StudentName").child("python");
     ref.once("value")

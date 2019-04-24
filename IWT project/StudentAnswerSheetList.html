@@ -29,7 +29,7 @@ body{background-image: url("./images/background.jpg");background-position: cente
   firebase.initializeApp(config);
 
 function studentAnswerSheets(){
-  var ref = firebase.database().ref("AnswerScripts").child("CS").child("6")
+  var ref = firebase.database().ref("AnswerScripts").child("CS").child("6") //subsitite CS and 6 for the actual value fetched from local storage
   ref.once("value").then(function(snapshot){
     snapshot.forEach(function(childSnapshot) {
       var key = childSnapshot.key;
@@ -39,16 +39,15 @@ function studentAnswerSheets(){
 }
 
 function studentSelected(studentName){
-    console.log(studentName)
+    console.log(studentName);
 }
 
 function addRow(student){
-    selectedstudent = student;
     let table = document.getElementById("myTableData");
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     row.insertCell(0).innerHTML = student;
-    row.insertCell(1).innerHTML = '<input type="button" value="Answer" onclick="studentSelected(selectedstudent)">';
+    row.insertCell(1).innerHTML = '<input type="button" value="Answer" '+'onclick=(studentSelected("'+student+'"))>';
 }
 
   </script>
