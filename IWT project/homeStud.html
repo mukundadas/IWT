@@ -58,18 +58,21 @@
 
   var questionPaperNames = [];
 
+  var studentName = "";
+
   function fetchUserInfo(){
       var databaseref = firebase.database().ref("students");
       databaseref.orderByChild("username").equalTo(name).on("child_added", function(snapshot) {
         var data = snapshot.val();
         var sem = data.Sem;
-        var branch = data.branch;
+        var branch = data.Dept;
+        studentName = data.FirstName;
         FetchQuestionPaperList(branch,sem);
     });
   }
 
     function FetchQuestionPaperList(userbranch,usersem){
-      var ref = firebase.database().ref("papers").child("CS").child("6");
+      var ref = firebase.database().ref("papers").child(userbranch).child(usersem);
       ref.once("value").then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key;
@@ -82,7 +85,7 @@
   var questionpapers = [];
 
   function buttonclicked(paperselected){
-    
+    //move to answerStud with the branch, sem, studentName and paper selected information.
   }
 
 var selectedpaper;

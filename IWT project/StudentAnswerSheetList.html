@@ -6,16 +6,26 @@
 <style>
 body{background-image: url("./images/background.jpg");background-position: center center;
     background-size: 100% 100%; }
+    div{
+    	background-color: white;
+    	opacity: 0.85;
+    	width:500px;
+    	height:320px;
+    	border-radius: 15px;
+    }
 </style>
 </head>
 <body onload="studentAnswerSheets()">
-  <center><h1>Students</h1></center>
+  <center><div>
+  <image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" >
+  <h1>Students</h1>
   <center><table id="myTableData"  border="1" cellpadding="2">
   <tr>
       <td><b>Students</b></td>
       <td>&nbsp</td>
   </tr>
 </table></center>
+  </div> </center>
   <script>
   var config = {
     apiKey: "AIzaSyBYo6YWjnWZ-erOL1ET03m8gGaFxJbR8-A",

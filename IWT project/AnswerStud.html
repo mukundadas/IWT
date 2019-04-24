@@ -49,7 +49,7 @@ var indexnumber = 0;
 var totalMarks = 0;
 
 function fetchQuestions(){
-  var ref = firebase.database().ref("papers").child("CS").child("6").child("python");
+  var ref = firebase.database().ref("papers").child("CS").child("6").child("python"); //subsitite the actual values here
 ref.once("value")
   .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -74,7 +74,7 @@ function setupScreen(indexnumber){
 function saveanswers(){
   const answertxt = document.getElementById('AnswerTxt').value;
   var database = firebase.database()
-  database.ref('AnswerScripts').child("CS").child("6").child("StudentName").child("python").push({
+  database.ref('AnswerScripts').child("CS").child("6").child("StudentName").child("python").push({ //substitute student name here
     Quest: questions[indexnumber],
     AllotedMarks: marks[indexnumber],
     answer: answertxt

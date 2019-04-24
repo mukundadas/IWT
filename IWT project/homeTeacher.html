@@ -83,7 +83,7 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
     <meta charset="utf-8">
     <title>Teacher</title>
   </head>
-  <body>
+  <body onload="fetchTeacherInfo()">
       <div>
       </br>
         <center><image class = "dsi" src="https://dayanandasagar.edu/templates/dsi/images/logo.png" ></center>
@@ -133,7 +133,7 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
           firebase.initializeApp(config);
 
           var name=localStorage.getItem("email");
-          console.log(name);
+
 
           document.getElementById("logout").onclick= () => {
               firebase.auth().signOut().then(window.location.assign('./home.html'));
@@ -150,7 +150,17 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
       }
 
       function AnswerSheetList(sem){
-          //save the sem info and move to the next page(StudentAnswerList)
+          //save the sem info(button selected) and branch and move to the next page(StudentAnswerSheetList)
+      }
+
+      var branch = ""
+
+      function fetchTeacherInfo(){
+        var databaseref = firebase.database().ref("teachers");
+        databaseref.orderByChild("username").equalTo(name).on("child_added", function(snapshot) {
+          var data = snapshot.val();
+          branch = data.Dept;
+      });
       }
     </script>
     </body>
