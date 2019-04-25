@@ -132,8 +132,8 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
           };
           firebase.initializeApp(config);
 
-          //var name=localStorage.getItem("email");
-          var name = "taj@gmail.com"
+          var name=localStorage.getItem("email");
+          console.log(name);
 
           document.getElementById("logout").onclick= () => {
               firebase.auth().signOut().then(window.location.assign('./home.html'));
