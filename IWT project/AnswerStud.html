@@ -53,7 +53,7 @@ var studName=localStorage.getItem("studentName");
 var paperSel=localStorage.getItem("paperselected");
 
 function fetchQuestions(){
-  var ref = firebase.database().ref("papers").child("CS").child("6").child("python"); //subsitite the actual values here
+  var ref = firebase.database().ref("papers").child(studentBranch).child(studentSemester).child(studentpaperSelected); //subsitite the actual values here
 ref.once("value")
   .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -75,10 +75,15 @@ function setupScreen(indexnumber){
     markslabel.innerHTML = marks[indexnumber]+ " Marks";
 }
 
+var studentSemester = localStorage.getItem("sem");
+var studentBranch = localStorage.getItem("branch");
+var studentname = localStorage.getItem("studentName");
+var studentpaperSelected = localStorage.getItem("paperselected");
+
 function saveanswers(){
   const answertxt = document.getElementById('AnswerTxt').value;
   var database = firebase.database()
-  database.ref('AnswerScripts').child("CS").child("6").child("StudentName").child("python").push({ //substitute student name here
+  database.ref('AnswerScripts').child(studentBranch).child(studentSemester).child(studentname).child(studentpaperSelected).push({ //substitute student name here
     Quest: questions[indexnumber],
     AllotedMarks: marks[indexnumber],
     answer: answertxt

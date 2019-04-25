@@ -38,8 +38,13 @@ body{background-image: url("./images/background.jpg");background-position: cente
 
   firebase.initializeApp(config);
 
+  var semselected = localStorage.getItem("tsem");
+  var branch = localStorage.getItem("branch");
+
 function studentAnswerSheets(){
-  var ref = firebase.database().ref("AnswerScripts").child("CS").child("6") //subsitite CS and 6 for the actual value fetched from local storage
+  console.log(branch);
+  console.log(semselected);
+  var ref = firebase.database().ref("AnswerScripts").child(branch).child(semselected) //subsitite CS and 6 for the actual value fetched from local storage
   ref.once("value").then(function(snapshot){
     snapshot.forEach(function(childSnapshot) {
       var key = childSnapshot.key;
@@ -60,8 +65,7 @@ function addRow(student){
     row.insertCell(0).innerHTML = student;
     row.insertCell(1).innerHTML = '<input type="button" value="Answer" '+'onclick=(studentSelected("'+student+'"))>';
 }
-  var sem=localStorage.getItem("sem");
-  var branch=localStorage.getItem("branch");
+
   </script>
 </body>
 </html>

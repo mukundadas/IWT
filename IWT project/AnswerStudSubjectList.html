@@ -45,7 +45,7 @@
     firebase.initializeApp(config);
 
     function fetchAnswerScriptsForStudent(){
-      var ref = firebase.database().ref("AnswerScripts").child("CS").child("6").child("StudentName"); //subsitite CS and 6 for the actual value fetched from local storage
+      var ref = firebase.database().ref("AnswerScripts").child(branch).child(semselected).child(selectedstudent); //subsitite CS and 6 for the actual value fetched from local storage
       ref.once("value").then(function(snapshot){
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key;
@@ -59,6 +59,10 @@
         localStorage.setItem("subjectSel",selectedSubject);
         window.location.assign('./AnswerSheet.html');
     }
+
+    var selectedstudent = localStorage.getItem("studentSel");
+    var semselected = localStorage.getItem("tsem");
+    var branch = localStorage.getItem("branch");
 
     function addRow(subject){
         let table = document.getElementById("myTableData");

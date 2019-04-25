@@ -132,18 +132,13 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
           };
           firebase.initializeApp(config);
 
-          var name=localStorage.getItem("email");
-
+          //var name=localStorage.getItem("email");
+          var name = "taj@gmail.com"
 
           document.getElementById("logout").onclick= () => {
               firebase.auth().signOut().then(window.location.assign('./home.html'));
           }
 
-          firebase.auth().onAuthStateChanged(function(user) {
-              if (!user) {
-                  window.location.assign('./home.html');
-              }
-          });
           var branch = "";
           function openForm() {
         document.getElementById("myForm").style.display = "block";
@@ -151,7 +146,7 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
 
       function AnswerSheetList(rsem){
           //save the sem info(button selected) and branch and move to the next page(StudentAnswerSheetList)
-          localStorage.setItem("sem",rsem);
+          localStorage.setItem("tsem",rsem);
           localStorage.setItem("branch",branch);
           window.location.assign('./StudentAnswerSheetList.html');
       }
@@ -165,6 +160,7 @@ label.headinglbl{font-family: Arial, Helvetica, serif;font-size: 20px;}
           branch = data.Dept;
       });
       }
+
     </script>
     </body>
 </html>
