@@ -57,6 +57,7 @@
     function buttonclicked(selectedSubject){
       //move to AnswerSheet.html with the branch,sem,student name and the subject selected in the page(selectedSubject)
         localStorage.setItem("subjectSel",selectedSubject);
+        window.location.assign('./AnswerSheet.html');
     }
 
     function addRow(subject){
