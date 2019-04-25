@@ -78,7 +78,7 @@ document.getElementById("AddBtn").addEventListener('click', e=>{
 })
 
 function verify(currentquestion, currentmarks){
-  if (currentmarks < marks) {
+  if (currentmarks <= marks) {
     marks = marks - currentmarks
     let lbl = document.getElementById('mm');
     lbl.innerHTML = "Remaining Marks: " + marks;
